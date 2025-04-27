@@ -16,7 +16,7 @@ O robô escolhido para as atividades é o **Sparki**, desenvolvido pela ArcBotic
 - **Sensores**: ultrassônico, infravermelho, acelerômetro, bússola, entre outros
 - **Atuadores**: motores de rodas, servo motor para caneta, buzzer, LEDs RGB
 
-<img src="images/Sparki.jpg" alt="Foto robô sparki" width="500" height="500"/>
+<img src="images/sparki.jpg" alt="Foto robô sparki" width="500" height="500"/>
 
 
 ## Linguagem de Programação
