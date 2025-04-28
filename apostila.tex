@@ -1,0 +1,230 @@
+\documentclass[conference]{IEEEtran}
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{lipsum}
+\usepackage{multirow} % Alinhar o conteúdo das células tabulares
+\usepackage{times}   % Fonte Times
+\usepackage{cite}    % Pacote para citações
+\usepackage{tabularx}
+\usepackage{color}
+\definecolor{cinza}{RGB}{128,128,128}
+\definecolor{azulbebe}{RGB}{136,206,250}
+\definecolor{verde}{RGB}{14,122,13}
+\title{Apostila didática: Edubot}
+
+\author{
+\IEEEauthorblockN{
+    Nícolas Rocha\IEEEauthorrefmark{1} - 222009278@aluno.unb.br,\\
+}
+\IEEEauthorblockA{\IEEEauthorrefmark{1}
+    Engenharia Aeroespacial - Faculdade do Gama, Universidade de Brasília\\
+}
+}
+
+\maketitle
+
+\begin{abstract}
+    Essa apostila foi criada pela equipe do Edubot para te ajudar a desvendar o \textit{Sparki}, esse robozinho simpático muito bem equipado, produzido pela Arcbotics. E, com isso, mostrar que programar todos os sensores, motores, tela, luzes e acessórios que ele possui pode ser bem simples e divertido, e não um monstro de sete cabeças como a maioria das pessoas pensa.
+\end{abstract}
+
+\section{\textbf{Quem somos nós?}}
+    Acreditando na diferença que a programação e a robótica podem fazer na trajetória escolar e profissional de uma pessoa, a Edubot é um Projeto de Extensão de Ação Contínua da Universidade de Brasília (UnB) e apoiado pelo capítulo estudantil de Robótica e Automação, da sigla em inglês 'RAS' (Robotics and Automation Society), do ramo estudantil da IEEE (Institute of Electrical and Eletronic Engineers) na UnB, que tem como principal objetivo o incentivo à formação de jovens nas áreas de Tecnologia e Engenharia através da realização de oficinas de robótica como atividades extracurriculares em escolas e instituições públicas de nível médio do Distrito Federal.
+\\
+    Para saber mais, acesso nosso Instagram <@projetoedubot> e nosso website <sites.google.com/view/edubotunb>.
+\end{Quem somos nós?}
+\section{\textbf{Introdução}}
+    O Sparki vem pronto, com sensor de distância e de luz, acelerador, tela LCD, LED RGB, campainha, controle remoto, dois motores e a mesma IDE do Arduino. Nessa apostila, vamos aprender a programar tudo isso, além de poder ver na prática alguns assuntos que vemos em Matemática e Física durante o Ensino Médio.
+\\
+    Além disso, aprender a programar pode ser bem útil na sua vida pessoal, dentre as vantagens, cito aqui algumas: o pensamento computacional traz uma grande metodologia para solucionar problemas, partindo de questões menores para depois resolver o todo, esse mesmo pensamento computacional pode melhorar até sua organização pessoal, além de desenvolver seu raciocínio lógico, aumentando a clareza, a rapidez e a fluidez de seus pensamentos. Ah! Também será ótimo para aprender um pouco de inglês.
+\end{Introdução}
+\\
+\\
+E aí?! Pronto pra começar?
+\section{\textbf{Afinal, o que é um robô?}}
+    O desejo de solucionar problemas do dia-a-dia de maneira mais eficiente e simples, foi - e ainda é - um dos maiores promotores para o desenvolvimento tecnológico das mais diversas sociedades. De acordo com a necessidade de cada período, cientistas (engenheiros, matemáticos, físicos, etc) de diferentes povos propunham maquinários e ferramentas que pudessem operar em conjunto com outros seres vivos para \textbf{modificar} a forma de trabalho, melhorando a qualidade de vida dos trabalhadores e das suas famílias. Com isso, impulsionou-se a busca por maiores níveis de \textbf{automação}, consequentemente levando às tentativas de aplicar esse conceito no cotidiano, sendo esse o patamar que alcançamos e presenciamos nos dias atuais.
+\\
+    É nesse contexto que a ideia da utilização de robôs para a realização de diversas tarefas acabou se popularizando, colocar uma máquina para completar uma tarefa muito trabalhosa ou difícil e assim poupar trabalho humano é um dos focos da robótica. O robozinho utilizado como material de estudo no nosso curso é o \textit{Sparki}, ele é uma dessas máquinas que tem como objetivo faciliar a nossa vida, nesse caso o ensino de programação, mas o que difere ele e outros robôs de um ar condicionado ou um projetor?
+\\
+\begin{center}
+\subsection{Para que estudar a definição de robô?}    
+\end{center}
+
+\\
+    Como descrito anteriormente, a robótica está presente em diversos aspectos do nosso contidiano. Dentre as mais diversas aplicações existentes, podemos listar algumas:
+\begin{itemize}
+    \item Culinárias: robôs que auxiliam na preparação de pratos e na entrega dos mesmos em restaurantes (segue-linha);
+    \item Robôs industriais: como carregados (segue-linha), robôs montadores de peças em indústrias;
+    \item Robôs cirurgicos: como o \textit{Star} (tecidos moles mais delicados), o \textit{PRECEYES} (áreas delicadas, como olhos), o \textit{CorPath} (operações cirúrgicas a distância através do WiFi), \textit{The Monarch Platform} (broncospia, i.e. inteverção cirúrgica nos brônquis), \textit{Mako Rio} (auxiliar em implante em joelhos e costela), \textit{Versius} (cirurgias não invasivas);
+    \item Robôs para comunicação com crianças;
+    \item Robôs para exploração espacial, como o \textit{Rover} em marte;
+    \item Robô para inspecionar tubulações;
+    \item Robô para serviços de casa (Seja de superfícies aquáticas, ou terrestres). Exemplos: \textit{Row-bot}, \textit{Ro-Boat}, \textit{Roomba}.
+\end{itemize}
+\begin{center}
+\subsection{Definindo um robô}    
+\end{center}
+    Para uma máquina ser considerada um robô, a primeira coisa que ela deve ser capaz de fazer é raciocinar de alguma maneira.
+    \\
+    \textit{Como assim, um robô tem que ser capaz de pensar assim como nós (pessoas)?}
+    Não necessariamente, algo assim é muito complexo e difícil de acontecer... Quando dizemos que um robô deve raciocinar, queremos dizer que ele deve ter a capacidade de analisar o mundo ao seu redor e tomar decisões a partir do que ele analisou, ele precisa agir em função do seu ambiente. Um robô segue linha, por exemplo, necessita de algum sensor que permita a ele encontrar a localização da linha e a partir dai decidir como irá se movimentar sobre ela e o que caso perca a linha de vista. De maneira geral, a ação realizada pelos robôs normalmente é algum tipo de movimento, alguma atividade mecânica como andar ou mover algo, um semáforo que acende a luz vermelha para carros para possibilitar a passagem de pedestres após ter seu botão apertado não é considerado um robô, uma porta automática se aproximaria mais do que é um robô.
+    \\
+    \\
+    \textit{Qual a relevância deste assunto no mundo? Afinal, para que mesmo eu estou lendo esta apostila? Eu sei que eu vou ganhar um diploma do curso, mas... E aí? O que mais que isso aqui pode me acrescentar?}
+    \\
+    Nosso curso busca ajudar os alunos a entender de forma simples como que um robô, um computador ou outros equipamentos raciocinam, como que nós pessoas somos capazes de criar linhas de pensamento para coisas não pensantes. Nós mostraremos que a programação não é um bicho de sete cabeças e fornecemos a base necessária para que vocês cheguem mais preparados e entusiasmados em algum curso superior, técnico ou trabalho que aborde programação.
+    \\
+    \begin{center}
+    \textbf{Definição}                
+    \end{center}
+    \\
+    \\
+    Um robô é uma máquina \textbf{autônoma}, que existe no \textbf{mundo físico}, possui \textbf{sensores} ara perceber o ambiente e consegue agir sobre o meio para alcançar um ou mais objetos definidos.
+    \\
+    \\
+    Nós já falamos sobre os sensores e conseguir agir sobre o meio, mas e os outros requisitos? Existir no mundo físico nada mais é que algo que somos capazes de tocar ou manipular, uma bola de futebol, por exemplo, existe no mundo físico, os sonhos que temos ao dormir não existem no mundo físico, pois não somos capazes de tocá-lo. Uma máquina autônoma ou automática, é uma máquina que após ligada ela funciona sozinha sem a constante necessidade de interferência externa, ela ainda pode aceitar o aperto de botões ou o recebimento de outros tipos de comandos, mas a ideia é que ela seja capaz de realizar tarefas sozinha quando for necessário.
+\section{\textbf{O que é um algoritmo?}}
+    Diariamente utilizamos algoritmos sem mesmo perceber. Quando cozinhamos uma macarrão, assamos um bolo, montamos um móvel, um brinquedo ou mesmo quando escovamos os dentes estamos utilizando este conceito para completar essas tarefas.
+    \\
+    Isto porque tomamos essas decisões nos baseando em instruções claras para chegar a um objetivo. Então, se estamos preparando um bolo, não podemos simplesmente colocar os ingredientes no forno sem antes misturá-los conforme a receita. Não teríamos um bolo, mas sim um Frankestein! Da mesma forma, não poderíamos esperar que ele fique pronto ao ligarmos o forno, mas não colocássemos a massa do bolo nele.
+    \\
+    [\begin{center}
+        \textbf{Definição}
+    \end{center}]
+    Algoritmo é um conjunto finito de instruções sequenciais lógicas, bem definidas, não ambíguas que levam à solução de um problema.
+    \\
+    \\
+    \textit{Mas afinal, o que esse bando de palavras complicadas querem dizer? Eu não entendi foi nada.}
+    \\
+    O que elas querem dizer é que, em outras palavras, um algoritmo indica um conjunto de instruções para realizar uma tarefa qualquer como, por exemplo, fazer pipoca. Seguimos uma receita que nos diz bem direitinho o que fazer para atingir o objetivo desejado, que no caso é aquela pipoca bem quentinha e crocante no final das contas! Assim ficou mais fácil de entender, né?
+\section{\textbf{Linguagem de Programação}}
+    Se fosse dado o comando abaixo para o \textit{Sparki} você acha que ele entenderia?
+    \begin{center}
+    "Sparki, vai pra frente! Sparki, vai pra trás!"
+    \end{center}
+    Quem pensou que ele não entenderia, acertou! O \textit{Sparki} não iria entender nada do que foi dito.
+    \\
+    \\
+    \textit{Então como ele entende os comandos que pedimos pra fazer?}
+    \\
+    Para nos comunicarmos com o \textit{Sparki}, é preciso passar os comandos para o computador através de uma linguagem de programação, que irá converter o que escrevemos para 0's e 1's e depois enviará para \textit{Sparki}, e assim ele será capaz de entender e executar o comando.
+    \begin{center}
+        \textbf{Definição}
+    \end{center}
+    Uma linguagem de programação é um método padronizado para comunicar instruções para um computador.
+    \\
+    \\
+    De maneira mais simples, linguagem de programação é a língua que usamos para nos comunicar com o computador assim como a língua portuguesa é a língua que usamos para nos comunicar entre nós. Assim como existem várias línguas como inglês, alemão e japonês, existem várias linguagens de programação, cada uma com sua peculiaridades, mas aqui no nosso curso iremos focar a linguagem que o \textit{Sparki} usa.
+    \\
+    \\
+    Como mencionado anteriormente, o que escrevemos para o \textit{Sparki} é antes transformado em 0's e 1's, isso porque os computadores utilização notação binaria. onde os números são representados apenas utilizando-se 0's e 1's. Podemos concluir então que, na verdade, os computadores não entendem a linguagem de programação!! Tudo o que escrevemos para eles em linguagem de programação é depois transformado em 0's e 1's para que finalmente possamos nos comunicar.
+\section{\textbf{Variáveis}}
+    Provavelmente você já ouviu o seu professor de matemática ou de física falando dessa tal de variável e que você também já usou muitas variáveis enquanto estudava, mas o que na verdade é essa tal de variável?
+    \\
+    Existem várias maneiras de definir o que é uma variável, por exemplo, quando seu professor de matemática falou que ela era aquela letrinha 'x' que vinha acompanhada de uma função e que, de fato, varia com o valor de entrada dessa função. No nosso caso, vamos olhar para as variáveis de uma maneira um pouquinho diferente.
+    \\
+    Pense em que um armário bem organizado, em que todas as roupas são separadas de acordo com o seu tipo, por exemplo, camisas em uma gaveta, calças e shorts em outras e assim por diante. Cada divisória do armário, ou seja, cada gaveta, deverá conter apenas um tipo de roupa específico para que o armário continue organizado.
+    \\
+    \\
+    \textit{Pensei! Mas o que isso tem a ver com o conceito de variáveis?}
+    \\
+    Tem tudo a ver! Assim como cada gaveta guarda um tipo específico de roupa, \textbf{cada variável guarda um tipo de específico de números ou caracteres}, dentre eles:números inteiros, números reais, letras,...
+    \begin{center}
+        \textbf{Definição}
+    \end{center}
+    Variável é um local reservado na memória para armazenar um tipo de dado.
+    \\
+    \\
+    Ao escrever um código, não conheceremos o endereço onde a variável será armazenada. Dessa forma, para fazer referência à variável usamos o nome da mesma e o computador se encarrega do resto. Toda variável deve um nome e esse nome não pode ser iniciado com um número. Além de ter um nome, a variável também precisa ter um tipo. O tipo de dado de uma variável determina o que ela é capaz de armazenar.
+\begin{center}
+    \subsection{Tipagem}
+\end{center}
+    Imagine que você acabou de se mudar para uma casa nova e agora você e sua família precisam tirar toda a mudança de dentro de várias caixas.
+    \\
+    \\
+    \textit{Pronto, imaginei! Mas ainda não entendi como coisas e variáveis podem ser parecidas.}
+    \\
+    Pode não parecer, mas caixas e variáveis são conceitos muito parecidos! Vamos lá, vou listar algumas características que as duas têm em comum. Ambas são usadas para:
+    \begin{itemize}
+        \item Guardar coisas;
+        \item Separar itens;
+        \item Organizar um ambiente.
+    \end{itemize}
+    Viu como são conceitos parecidos? A principal diferença é que usamos caixas no mundo físico e variáveis usamos no mundo virtual.
+    \\
+    \\
+    Agora que você conseguiu entender a relação entre caixas e variáveis, vamos voltar ao exemplo que pedi para você imaginar. Antes da mudança ter sido transportada para sua nova casa, as coisas da sua antiga casa foram guardadas dentro de caixas que foram nomeadas da seguinte forma: "quarto 1", "quarto 2", "quarto 3", "sala" e "cozinha".
+    \\
+    \\
+    Você e sua família agora precisam organizar a nova casa, e como toda mudança foi bem organizada, não deve ser uma tarefa muito difícil, né?! Se vocês quiserem organizar a cozinha, por exemplo, é só procurar as caixas que foram nomeadas como "cozinha".
+    \\
+    \\
+    Variáveis funcionam exatamente como as caixas da sua mudança. Na linguagem C, \textbf{para cada tipo de informação, um tipo de variável deve ser utilizada para armazená-la}. Assim como em uma mudança não podemos guardar os utensílios da cozinha na mesma caixa em que guardamos nossas roupas, também não podemos guardar tipos diferentes de informações em uma mesma variável.
+    \\
+    \\
+    Na linguagem C existem:
+    \\
+    \begin{itemize}
+        \item Variáveis do tipo \textbf{\color{blue}{int}} que guardam números inteiros:
+        \\
+        {\color{blue}int} idade = 16;
+        \item Variáveis do tipo \textbf{\color{blue}{char}} que guardam caracteres:
+        \\
+        {\color{blue}char} letra = '{\color{verde}a}';
+        \item Variáveis do tipo \textbf{\color{blue}{float}} que guardam números com ponto decimal:
+        \\
+        {\color{blue}float} altura = 1.70;
+    \end{itemize}
+    \begin{center}
+        \textbf{\color{red}ATENÇÃO!}
+    \end{center}
+    Nada nos impede de armazenar um número inteiro em uma variável do tipo \textit{float}, afinal, um número inteiro também está dentro do conjunto dos números racionais (números com vírgula).
+    \\
+    \\
+    Da mesma forma, também podemos guardar um número decimal em uma variável do tipo \textit{int}, mas nesse caso, apenas o número inteiro será armazenado, a parte decimal será ignorada. Por fim, também é possível armazenar números inteiros e números com vírgula em uma variável do tipo \textit{char}, porém, o valor armazenado será considerado como caractere, e não como número.
+    \\
+    \\
+    \textit{Mas como assim? Agora fiquei confuso! Antes você disse que só era possível guardar valores de acordo com o tipo de variável. Números inteiros em variáveis do tipo {\color{blue}int}, números com casa decimal em variáveis do tipo {\color{blue}float} e caracteres em variáveis do tipo {\color{blue}char}. E agora você me diz que eu posso guardar qualquer coisa dentro de uma variável do tipo {\color{blue}char}.}
+    \\
+    \\
+    Pois é, meu caro amigo! Essa é uma das pegadinhas da linguagem C. Respondendo a sua pergunta, sim, é possível guardar números em uma variável do tipo {\color{blue}char}, mas isso não significa que você podera fazer operações matemáticas com valores armazenados em uma variável do tipo {\color{blue}char}, porque ela será estendida como um caractere. Mas isso é assunto para a nossa próxima seção.
+    \begin{center}
+        \subsection{Declaração de Variáveis}
+    \end{center}
+    Agora que entendemos que cada variável armazena um tipo de dado, devemos aprender a declarar uma variável de acordo com o tipo dela. Esse é o primeiro passo para utilizarmos uma variável em nosso código, sem ele, a compilação apresentará falhas.
+    \\
+    \textbf{Lembrando: }compilação é a fase em que o computador olha o seu código e verifica se não existem erros de sintaxe em relação à linguagem que você escreveu.
+    \\
+    \begin{center}
+        EXEMPLO I) \\
+        Neste exemplo iremos declarar uma variável do tipo inteira ({\color{blue}int}) chamada 'distancia'.
+    \end{center}
+    {\color{cinza}1}\quad{\color{blue}\#include} <Sparki.h>\\
+    {\color{cinza}2}\\
+    {\color{cinza}3}\quad{\color{blue}int} distancia; {\color{cinza}//declarando a variavel distancia do tipo int}\\
+    {\color{cinza}4}\\
+    {\color{cinza}5}\quad{\color{blue}void} setup()\\
+    {\color{cinza}6}\quad\{\\
+    {\color{cinza}7}\quad\}\\
+    {\color{cinza}8}\\
+    {\color{cinza}9}\quad{\color{blue}void} loop()\\
+    {\color{cinza}10}\quad\{\\
+    {\color{cinza}11}\quad\quad distancia=10; {\color{cinza}//atribuindo o valor de 10 (int) para a variavel distancia}\\
+    {\color{cinza}12}\quad\}
+    \begin{center}
+        EXEMPLO 2)\\
+        Neste exemplo iremos fazer o código diferente ao anterior mas que faz a mesma coisa.
+    \end{center}
+    {\color{cinza}1}\quad{\color{blue}\#include} <Sparki.h>\\
+    {\color{cinza}2}\\
+    {\color{cinza}3}\quad{\color{blue}int} distancia=10; {\color{cinza}//declarando a variavel distancia como int e atribuindo o valor 10 a ela}\\
+    {\color{cinza}4}\\
+    {\color{cinza}5}\quad{\color{blue}void} setup()\\
+    {\color{cinza}6}\quad\{\\
+    {\color{cinza}7}\quad\}\\
+    {\color{cinza}8}\\
+    {\color{cinza}9}\quad{\color{blue}void} loop()
+    \\
+    Geralmente, optamos por declarar por uma variável fora do {\color{blue}void} setup() e do {\color{blue}{void}} loop(), pois, assim, podemos utilizá-la em qualquer lugar do código, mas também é possível declará-la dentro do {\color{blue}void} setup() ou {\color{blue}{void}} loop(). A diferença é que, caso você declare uma variável dentro do {\color{blue}{void}} loop(), apenas poderá utilizá-la dentro do {\color{blue}{void}} loop();
+\end{document}
