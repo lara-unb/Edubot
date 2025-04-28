@@ -7,7 +7,7 @@
 
 **Edubot** é uma iniciativa da **Universidade de Brasília (UnB)**, vinculada ao capítulo estudantil da **Robotics and Automation Society (RAS)** do IEEE. O projeto tem como objetivo promover o ensino de **robótica educacional** em escolas públicas do **Distrito Federal**, proporcionando aos estudantes o primeiro contato com conceitos de ciência, tecnologia, engenharia e matemática (STEM).
 
-<img src="images/ras-logo.png" alt="Foto logo RAS IEEE" width="400" height="180"/>
+<img src="images/Identificadores RAS UnB.png" alt="Foto logo RAS IEEE" width="400" height="180"/>
 
 ## Robô Utilizado
 
