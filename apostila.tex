@@ -2,204 +2,302 @@
 \usepackage[brazil]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{graphicx}
-\usepackage{lipsum}
-\usepackage{multirow} % Alinhar o conteúdo das células tabulares
-\usepackage{times}   % Fonte Times
-\usepackage{cite}    % Pacote para citações
-\usepackage{tabularx}
+\usepackage{tgcursor}
+\usepackage{times}
+\usepackage{cite}
 \usepackage{color}
+\usepackage{graphicx}
+\pagenumbering{roman}
+\IEEEoverridecommandlockouts
+\usepackage{amsmath,amssymb,amsfonts}
 \definecolor{cinza}{RGB}{128,128,128}
 \definecolor{azulbebe}{RGB}{136,206,250}
 \definecolor{verde}{RGB}{14,122,13}
-\title{Apostila didática: Edubot}
 
+% 1 -> o que é um robô? 2 -> Algoritmos e fluxograma 3 -> Tela LCD 4 -> Movimentação 5 -> Variáveis 6 -> Ultrassom 7 -> If e Else 8 -> Infravermelho
+
+\begin{document}
+\title{Apostila didática: Edubot}
 \author{
 \IEEEauthorblockN{
-    Nícolas Rocha\IEEEauthorrefmark{1} - 222009278@aluno.unb.br,\\
+    Nícolas Rocha\IEEEauthorrefmark{3} - nicolas.rocha@aluno.unb.br,\\
+    Roberto Baptista\IEEEauthorrefmark{4} - robertobaptista@unb.br,\\
+    João França\IEEEauthorrefmark{1} - 241009815@aluno.unb.br,\\
+    Miguel Scardini\IEEEauthorrefmark{1} - 241009851@aluno.unb.br,\\
+    Renato Ferreira\IEEEauthorrefmark{1} - 2401009860@aluno.unb.br,\\
 }
 \IEEEauthorblockA{\IEEEauthorrefmark{1}
-    Engenharia Aeroespacial - Faculdade do Gama, Universidade de Brasília\\
+    Engenharia Mecatrônica - Faculdade de Tecnologia, Universidade de Brasília\\
+}
+\IEEEauthorblockA{\IEEEauthorrefmark{3}
+    Engenharia Aeroespacial - Faculdade de Ciências e Tecnologias em Engenharia, Universidade de Brasília\\
+}
+\IEEEauthorblockA{\IEEEauthorrefmark{4}
+    Professor Doutor - Faculdade de Ciências e Tecnologias em Engenharia, Universidade de Brasília\\
 }
 }
-
 \maketitle
 
 \begin{abstract}
     Essa apostila foi criada pela equipe do Edubot para te ajudar a desvendar o \textit{Sparki}, esse robozinho simpático muito bem equipado, produzido pela Arcbotics. E, com isso, mostrar que programar todos os sensores, motores, tela, luzes e acessórios que ele possui pode ser bem simples e divertido, e não um monstro de sete cabeças como a maioria das pessoas pensa.
 \end{abstract}
-
 \section{\textbf{Quem somos nós?}}
-    Acreditando na diferença que a programação e a robótica podem fazer na trajetória escolar e profissional de uma pessoa, a Edubot é um Projeto de Extensão de Ação Contínua da Universidade de Brasília (UnB) e apoiado pelo capítulo estudantil de Robótica e Automação, da sigla em inglês 'RAS' (Robotics and Automation Society), do ramo estudantil da IEEE (Institute of Electrical and Eletronic Engineers) na UnB, que tem como principal objetivo o incentivo à formação de jovens nas áreas de Tecnologia e Engenharia através da realização de oficinas de robótica como atividades extracurriculares em escolas e instituições públicas de nível médio do Distrito Federal.
+    Acreditando na diferença que a programação e a robótica podem fazer na trajetória escolar e profissional de uma pessoa, o Edubot é um Projeto de Extensão de Ação Contínua da Universidade de Brasília (UnB) e apoiado pelo capítulo estudantil de Robótica e Automação, da sigla em inglês 'RAS' (Robotics and Automation Society), do ramo estudantil da IEEE (Institute of Electrical and Eletronic Engineers) na UnB, que tem como principal objetivo o incentivo à formação de jovens nas áreas de Tecnologia e Engenharia através da realização de oficinas de robótica como atividades extracurriculares em escolas e instituições públicas de nível médio do Distrito Federal.
 \\
-    Para saber mais, acesso nosso Instagram <@projetoedubot> e nosso website <sites.google.com/view/edubotunb>.
-\end{Quem somos nós?}
+    \par
+    Para saber mais, acesse nosso Instagram <@projetoedubot> e nosso website <sites.google.com/view/edubotunb>.
 \section{\textbf{Introdução}}
     O Sparki vem pronto, com sensor de distância e de luz, acelerador, tela LCD, LED RGB, campainha, controle remoto, dois motores e a mesma IDE do Arduino. Nessa apostila, vamos aprender a programar tudo isso, além de poder ver na prática alguns assuntos que vemos em Matemática e Física durante o Ensino Médio.
-\\
+    \par 
     Além disso, aprender a programar pode ser bem útil na sua vida pessoal, dentre as vantagens, cito aqui algumas: o pensamento computacional traz uma grande metodologia para solucionar problemas, partindo de questões menores para depois resolver o todo, esse mesmo pensamento computacional pode melhorar até sua organização pessoal, além de desenvolver seu raciocínio lógico, aumentando a clareza, a rapidez e a fluidez de seus pensamentos. Ah! Também será ótimo para aprender um pouco de inglês.
-\end{Introdução}
-\\
-\\
-E aí?! Pronto pra começar?
+    \par
+    E aí?! Pronto pra começar?
 \section{\textbf{Afinal, o que é um robô?}}
     O desejo de solucionar problemas do dia-a-dia de maneira mais eficiente e simples, foi - e ainda é - um dos maiores promotores para o desenvolvimento tecnológico das mais diversas sociedades. De acordo com a necessidade de cada período, cientistas (engenheiros, matemáticos, físicos, etc) de diferentes povos propunham maquinários e ferramentas que pudessem operar em conjunto com outros seres vivos para \textbf{modificar} a forma de trabalho, melhorando a qualidade de vida dos trabalhadores e das suas famílias. Com isso, impulsionou-se a busca por maiores níveis de \textbf{automação}, consequentemente levando às tentativas de aplicar esse conceito no cotidiano, sendo esse o patamar que alcançamos e presenciamos nos dias atuais.
-\\
+\par
     É nesse contexto que a ideia da utilização de robôs para a realização de diversas tarefas acabou se popularizando, colocar uma máquina para completar uma tarefa muito trabalhosa ou difícil e assim poupar trabalho humano é um dos focos da robótica. O robozinho utilizado como material de estudo no nosso curso é o \textit{Sparki}, ele é uma dessas máquinas que tem como objetivo faciliar a nossa vida, nesse caso o ensino de programação, mas o que difere ele e outros robôs de um ar condicionado ou um projetor?
-\\
 \begin{center}
 \subsection{Para que estudar a definição de robô?}    
 \end{center}
-
-\\
+\par
     Como descrito anteriormente, a robótica está presente em diversos aspectos do nosso contidiano. Dentre as mais diversas aplicações existentes, podemos listar algumas:
 \begin{itemize}
     \item Culinárias: robôs que auxiliam na preparação de pratos e na entrega dos mesmos em restaurantes (segue-linha);
     \item Robôs industriais: como carregados (segue-linha), robôs montadores de peças em indústrias;
     \item Robôs cirurgicos: como o \textit{Star} (tecidos moles mais delicados), o \textit{PRECEYES} (áreas delicadas, como olhos), o \textit{CorPath} (operações cirúrgicas a distância através do WiFi), \textit{The Monarch Platform} (broncospia, i.e. inteverção cirúrgica nos brônquis), \textit{Mako Rio} (auxiliar em implante em joelhos e costela), \textit{Versius} (cirurgias não invasivas);
     \item Robôs para comunicação com crianças;
-    \item Robôs para exploração espacial, como o \textit{Rover} em marte;
+    \item Robôs para exploração espacial, como o \textit{Rover}, em marte;
     \item Robô para inspecionar tubulações;
     \item Robô para serviços de casa (Seja de superfícies aquáticas, ou terrestres). Exemplos: \textit{Row-bot}, \textit{Ro-Boat}, \textit{Roomba}.
 \end{itemize}
 \begin{center}
 \subsection{Definindo um robô}    
 \end{center}
+\par
     Para uma máquina ser considerada um robô, a primeira coisa que ela deve ser capaz de fazer é raciocinar de alguma maneira.
-    \\
+    \par
     \textit{Como assim, um robô tem que ser capaz de pensar assim como nós (pessoas)?}
     Não necessariamente, algo assim é muito complexo e difícil de acontecer... Quando dizemos que um robô deve raciocinar, queremos dizer que ele deve ter a capacidade de analisar o mundo ao seu redor e tomar decisões a partir do que ele analisou, ele precisa agir em função do seu ambiente. Um robô segue linha, por exemplo, necessita de algum sensor que permita a ele encontrar a localização da linha e a partir dai decidir como irá se movimentar sobre ela e o que caso perca a linha de vista. De maneira geral, a ação realizada pelos robôs normalmente é algum tipo de movimento, alguma atividade mecânica como andar ou mover algo, um semáforo que acende a luz vermelha para carros para possibilitar a passagem de pedestres após ter seu botão apertado não é considerado um robô, uma porta automática se aproximaria mais do que é um robô.
-    \\
-    \\
+    \par
     \textit{Qual a relevância deste assunto no mundo? Afinal, para que mesmo eu estou lendo esta apostila? Eu sei que eu vou ganhar um diploma do curso, mas... E aí? O que mais que isso aqui pode me acrescentar?}
-    \\
+    \par
     Nosso curso busca ajudar os alunos a entender de forma simples como que um robô, um computador ou outros equipamentos raciocinam, como que nós pessoas somos capazes de criar linhas de pensamento para coisas não pensantes. Nós mostraremos que a programação não é um bicho de sete cabeças e fornecemos a base necessária para que vocês cheguem mais preparados e entusiasmados em algum curso superior, técnico ou trabalho que aborde programação.
     \\
     \begin{center}
     \textbf{Definição}                
     \end{center}
-    \\
-    \\
+    \par
     Um robô é uma máquina \textbf{autônoma}, que existe no \textbf{mundo físico}, possui \textbf{sensores} ara perceber o ambiente e consegue agir sobre o meio para alcançar um ou mais objetos definidos.
-    \\
-    \\
+    \par
     Nós já falamos sobre os sensores e conseguir agir sobre o meio, mas e os outros requisitos? Existir no mundo físico nada mais é que algo que somos capazes de tocar ou manipular, uma bola de futebol, por exemplo, existe no mundo físico, os sonhos que temos ao dormir não existem no mundo físico, pois não somos capazes de tocá-lo. Uma máquina autônoma ou automática, é uma máquina que após ligada ela funciona sozinha sem a constante necessidade de interferência externa, ela ainda pode aceitar o aperto de botões ou o recebimento de outros tipos de comandos, mas a ideia é que ela seja capaz de realizar tarefas sozinha quando for necessário.
 \section{\textbf{O que é um algoritmo?}}
     Diariamente utilizamos algoritmos sem mesmo perceber. Quando cozinhamos uma macarrão, assamos um bolo, montamos um móvel, um brinquedo ou mesmo quando escovamos os dentes estamos utilizando este conceito para completar essas tarefas.
-    \\
+    \par
     Isto porque tomamos essas decisões nos baseando em instruções claras para chegar a um objetivo. Então, se estamos preparando um bolo, não podemos simplesmente colocar os ingredientes no forno sem antes misturá-los conforme a receita. Não teríamos um bolo, mas sim um Frankestein! Da mesma forma, não poderíamos esperar que ele fique pronto ao ligarmos o forno, mas não colocássemos a massa do bolo nele.
-    \\
-    [\begin{center}
+    \begin{center}
         \textbf{Definição}
-    \end{center}]
+    \end{center}
+    \par
     Algoritmo é um conjunto finito de instruções sequenciais lógicas, bem definidas, não ambíguas que levam à solução de um problema.
-    \\
-    \\
+    \par
     \textit{Mas afinal, o que esse bando de palavras complicadas querem dizer? Eu não entendi foi nada.}
-    \\
+    \par
     O que elas querem dizer é que, em outras palavras, um algoritmo indica um conjunto de instruções para realizar uma tarefa qualquer como, por exemplo, fazer pipoca. Seguimos uma receita que nos diz bem direitinho o que fazer para atingir o objetivo desejado, que no caso é aquela pipoca bem quentinha e crocante no final das contas! Assim ficou mais fácil de entender, né?
 \section{\textbf{Linguagem de Programação}}
     Se fosse dado o comando abaixo para o \textit{Sparki} você acha que ele entenderia?
     \begin{center}
     "Sparki, vai pra frente! Sparki, vai pra trás!"
     \end{center}
+    \par
     Quem pensou que ele não entenderia, acertou! O \textit{Sparki} não iria entender nada do que foi dito.
-    \\
-    \\
+    \par
     \textit{Então como ele entende os comandos que pedimos pra fazer?}
-    \\
+    \par
     Para nos comunicarmos com o \textit{Sparki}, é preciso passar os comandos para o computador através de uma linguagem de programação, que irá converter o que escrevemos para 0's e 1's e depois enviará para \textit{Sparki}, e assim ele será capaz de entender e executar o comando.
     \begin{center}
         \textbf{Definição}
     \end{center}
+    \par
     Uma linguagem de programação é um método padronizado para comunicar instruções para um computador.
-    \\
-    \\
+    \par
     De maneira mais simples, linguagem de programação é a língua que usamos para nos comunicar com o computador assim como a língua portuguesa é a língua que usamos para nos comunicar entre nós. Assim como existem várias línguas como inglês, alemão e japonês, existem várias linguagens de programação, cada uma com sua peculiaridades, mas aqui no nosso curso iremos focar a linguagem que o \textit{Sparki} usa.
-    \\
-    \\
+    \par
     Como mencionado anteriormente, o que escrevemos para o \textit{Sparki} é antes transformado em 0's e 1's, isso porque os computadores utilização notação binaria. onde os números são representados apenas utilizando-se 0's e 1's. Podemos concluir então que, na verdade, os computadores não entendem a linguagem de programação!! Tudo o que escrevemos para eles em linguagem de programação é depois transformado em 0's e 1's para que finalmente possamos nos comunicar.
+\section{\textbf{Funções importantes void setup() e void loop()}}
+    \par
+    O comando {\fontfamily{qcr}\selectfont {\color{blue}\#include} <Sparki.h>} e as funções {\fontfamily{qcr}\selectfont {\color{blue}\#void} loop()} são as funções mais importantes na hora de começar a programar o \textit{Sparki}, pois entender o que elas significam e como funcionam é essencial para saber onde escrever determinada parte do código em relação ao tipo de aplicação.
+    \\
+    {\fontfamily{qcr}\selectfont 
+    {\color{cinza}1}\quad {\color{blue}\#include} <Sparki.h>\\
+    {\color{cinza}2}\\
+    {\color{cinza}3}\quad{\color{blue}void} setup()\\
+    {\color{cinza}4}\quad\{\\
+    {\color{cinza}5}\quad\}\\
+    {\color{cinza}6}\\
+    {\color{cinza}7}\quad{\color{blue}void} loop()\\
+    {\color{cinza}8}\quad\{\\
+    {\color{cinza}9}\quad\}
+    }\\
+   \begin{itemize}
+       \item Biblioteca{\fontfamily{qcr}\selectfont sparki.h}: esta biblioteca guarda todas as funções relacionadas ao \textit{Sparki}, e é necessário inserir ela na primeira linha do código, para que estas funções sejam habilitadas para a comunicação entre o computador e o robô funcionar.
+       \item {\fontfamily{qcr}\selectfont {\color{blue}void} setup}: esta função é a primeira a rodar no código, e tudo que está dentro de suas chaves é executado apenas uma vez. A função é bastante útil para inserir configurações iniciais, como por exemplo limpar a tela LCD, ou fazer algum movimento inicial que não irá se repetir no resto do programa.
+       \item {\fontfamily{qcr}\selectfont{\color{blue}void} loop()}: esta função é usada para colocar códigos que irão ficar se repetindo no programa, ou seja, sempre ficará rodando até que seja carregado algum outro programa no \textit{Sparki}. Um exemplo para esta função é deixar o \textit{Sparki} sempre com o LED de uma cor ligado, ou sempre se movimentando em uma determinada direção.
+   \end{itemize}
+  \begin{center}
+      \subsection{Exercícios}
+  \end{center}
+  1) Em suas palavras, defina o que é um algoritmo e dê 2 exemplos não citados no capítulo.
+  \\
+  \\
+  2) O objetivo de uma linguagem de programação é:
+  \\
+  a) Fornecer um conjunto de regras bem definidas que permita escrever programas de computador de forma mais amigável evitando ambiguidades.
+  \\
+  b) Estabelecer regras para a comunicação entre seres humanos.
+  \\
+  c) Dar a liberdade para cada programador escrever programas de computador a partir do seu próprio conjunto de regras, facilitando o processo de programação.
+  \\
+  d) Definir um padrão para programadores utilizarem os comandos binários intrísecos a cada arquitetura de processador.
+  \\
+\section{\textbf{Tela LCD (Liquid Crystal Display)}}
+\begin{center}
+    \subsection{Introdução}    
+\end{center}
+    \par
+    O \textit{Sparki} possui um tela LCD onde é possível desenhar, escrever e visualizar dados e sensores em funcionamento. Ao olhar bem de perto, pode-se perceber que a tela é formada por pequenos pontos que podem ser programados para estarem em um de dois estados, ligado ou desligado. Nós chamamos esses pontos de \textit{pixel}. Eles também estão presentes em TVs, monitores de computador, celulares e eles são ligados ou desligados em uma disposição na qual seja possível formar uma imagem na tela. No caso do \textit{Sparki}, ele possui 128 \textit{pixels} na horizontal e 64 \textit{pixels} na vertical, e para identificar cada pixel deve ser fornecido a coordenada horizontal, vertical e se ele deverá ficar aceso ou apagado.
+\begin{center}
+       \subsection{Funções}
+\end{center}
+    \par
+    Para imprimir algo na tela LCD, você deve seguir 4 passos importantíssimos:
+    \begin{itemize}
+        \item Limpar o LCD -> {\fontfamily{qcr} \selectfont {\color{cinza}sparki.clearLCD()}}
+        \item Informar o que você quer que apareça no LCD -> \\
+        {\fontfamily{qcr}\selectfont
+        {\color{cinza}1}\quad sparki.drawLine(x, y, 127, 63);\\
+        {\color{cinza}2}\quad sparki.drawRect(5, 5, 30, 10);\\
+        {\color{cinza}3}\quad sparki.drawRectFilled(15, 17, 30, 10);\\
+        {\color{cinza}4}\quad sparki.drawCircle(20, 45, 12);\\
+        {\color{cinza}5}\quad sparki.drawFilled(15, 17, 30, 10);\\
+        {\color{cinza}6}\quad sparki.print({\color{verde}''não pula linha''});\\
+        {\color{cinza}7}\quad sparki.println({\color{verde}''pula linha depois''});
+        }
+        \item Atualizar a tela -> {\fontfamily{qcr}\selectfont sparki.updateLCD()}
+        \item Criar um intervalo de tempo -> {\fontfamily{qcr}\selectfont delay()}
+    \end{itemize}
+    \par
+    \begin{enumerate}
+        \item {\textbf{Limpar o LCD}}: O primeiro passo para mostrar algo no LCD é limpar todas as informações que estão armazenadas no \textit{Sparki} e, para isso, utilizamos a função {\fontfamily{qcr} \selectfont sparki.clearLCD()}. Esta função não precisa de parâmetros, então não precisamos escrever nada dentro dos parâmetros.
+        \begin{center}
+            {\color{azulbebe}Para não esquecer!}\\
+            "Clear" traduzido para o português significa "limpar".
+        \end{center}
+        \item {\textbf{Informar ao LCD}}:
+            \begin{itemize}
+                \item {\textbf{sparki.drawLine(xi, yi, xf, yf)}}: Esta função cria uma linha de acordo com o ponto de início e do fim do traço. Então xi e yi são as coordenadas do ponto de início do traço.
+                \item {\textbf{sparki.drawRect(xi, yi, xf, yf)}}: Esta função desenha um retângulo, sendo xi e yi coordenadas do canto superior esquerdo do retângulo e xf e yf coordenadas do canto inferior direito do retângulo.
+                \item {\textbf{sparki.drawRectFilled(xi, yi, xf, yf)}}: Esta função é semelhante à {\fontfamily{qcr}\selectfont sparki.drawRect(xi, yi,xf, yf)}, a única diferença é que ele desenha um círculo preenchido.
+                \item {\textbf{sparki.drawCircle(xc, yc, raio)}}: Esta função desenha um círculo de acordo com as coordenadas xc e yc indicam onde deve ficar o centro do círculo e o parâmetro do {\fontfamily{qcr} \selectfont raio} indica o tamanho do raio.
+                \item {\textbf{sparki.drawCircleFilled(xc, yc, raio)}}: Esta função é semelhante à {\fontfamily{qcr} \selectfont sparki.drawCircle(xc, tc, raio)}, a única diferença é que ele desenha um círculo preenchido.
+                \item {\textbf{sparki.print()}}: Com esta função, é possível imprimir caracteres e números na tela, basta escrever a mensagem a ser impressa dentro dos parênteses e das aspas. Essa função também é bastante utilizada para imprimir valores recebidos dos sensores, mas, para essa utilidade, o parâmetro deverá ser uma variável, e o nome não será escrito entre aspas.
+                \item{\textbf{sparki.println}}: Assim como a função anterior, ela imprime uma mensagem na tela. A diferença é que essa função gera uma quebra de linha ao fim dessa mensagem.
+            \end{itemize}
+        \item {\textbf{Atualizar a tela LCD}}: a função {\fontfamily{qcr} \selectfont sparki.updateLCD()} é importante para atualizar a tela, informando ao Sparki que ele já pode mostrar no LCD as informações que foram passadas.
+        \item {\textbf{Criar um intervalo de tempo}}: para criar um intervalo de tempo, devemos utilizar a função {\fontfamily{qcr} \selectfont delay()}. Ela não precisa de parâmetros.
+        \par
+        {\textit{Não entendi o porquê de precisarmos criar um intervalo de tempo. Não faz sentido!}}\\
+        \par
+        O intervalo de tempo é necessário para que a mensagem/imagem permaneça na tela por tempo suficiente para que possamos visualizá-la. Caso criemos um código para o LCD sem incluir esse passo, não conseguiremos visualizar a tela. Ficou confuso? Basta pensar que estamos limpando e atualizando o LCD com novas informações o tempo todo, então, os {\textit{pixels}} estão sendo ligados e desligados a cada vez que o {\fontfamily{qcr} \selectfont {\color{blue}void} loop()} é lido.
+    \end{enumerate}
+    \begin{center}
+        {\color{azulbebe} Para não esquecer!}\\
+        "Draw" traduzido para o português significa "desenhar".\\
+        "Line" traduzido para o português significa "linha".\\
+        "Rect" é uma abreviação de "rectangle", que traduzido para o português significa "retângulo".\\
+        "Circle" traduzido para o português significa "círculo".\\
+        "Filled" significa "preenchido".\\
+        "Print" significa "imprimir".\\
+        "Update" traduzido para o português significa "atualizar".
+    \end{center}
 \section{\textbf{Variáveis}}
     Provavelmente você já ouviu o seu professor de matemática ou de física falando dessa tal de variável e que você também já usou muitas variáveis enquanto estudava, mas o que na verdade é essa tal de variável?
-    \\
+    \par
     Existem várias maneiras de definir o que é uma variável, por exemplo, quando seu professor de matemática falou que ela era aquela letrinha 'x' que vinha acompanhada de uma função e que, de fato, varia com o valor de entrada dessa função. No nosso caso, vamos olhar para as variáveis de uma maneira um pouquinho diferente.
-    \\
+    \par
     Pense em que um armário bem organizado, em que todas as roupas são separadas de acordo com o seu tipo, por exemplo, camisas em uma gaveta, calças e shorts em outras e assim por diante. Cada divisória do armário, ou seja, cada gaveta, deverá conter apenas um tipo de roupa específico para que o armário continue organizado.
-    \\
-    \\
+     \par
     \textit{Pensei! Mas o que isso tem a ver com o conceito de variáveis?}
-    \\
+    \par
     Tem tudo a ver! Assim como cada gaveta guarda um tipo específico de roupa, \textbf{cada variável guarda um tipo de específico de números ou caracteres}, dentre eles:números inteiros, números reais, letras,...
     \begin{center}
         \textbf{Definição}
     \end{center}
+    \par
     Variável é um local reservado na memória para armazenar um tipo de dado.
-    \\
-    \\
+    \par
     Ao escrever um código, não conheceremos o endereço onde a variável será armazenada. Dessa forma, para fazer referência à variável usamos o nome da mesma e o computador se encarrega do resto. Toda variável deve um nome e esse nome não pode ser iniciado com um número. Além de ter um nome, a variável também precisa ter um tipo. O tipo de dado de uma variável determina o que ela é capaz de armazenar.
 \begin{center}
     \subsection{Tipagem}
 \end{center}
+    \par
     Imagine que você acabou de se mudar para uma casa nova e agora você e sua família precisam tirar toda a mudança de dentro de várias caixas.
-    \\
-    \\
+    \par
     \textit{Pronto, imaginei! Mas ainda não entendi como coisas e variáveis podem ser parecidas.}
-    \\
+    \par
     Pode não parecer, mas caixas e variáveis são conceitos muito parecidos! Vamos lá, vou listar algumas características que as duas têm em comum. Ambas são usadas para:
     \begin{itemize}
         \item Guardar coisas;
         \item Separar itens;
         \item Organizar um ambiente.
     \end{itemize}
+    \par
     Viu como são conceitos parecidos? A principal diferença é que usamos caixas no mundo físico e variáveis usamos no mundo virtual.
-    \\
-    \\
+    \par
     Agora que você conseguiu entender a relação entre caixas e variáveis, vamos voltar ao exemplo que pedi para você imaginar. Antes da mudança ter sido transportada para sua nova casa, as coisas da sua antiga casa foram guardadas dentro de caixas que foram nomeadas da seguinte forma: "quarto 1", "quarto 2", "quarto 3", "sala" e "cozinha".
-    \\
-    \\
+    \par
     Você e sua família agora precisam organizar a nova casa, e como toda mudança foi bem organizada, não deve ser uma tarefa muito difícil, né?! Se vocês quiserem organizar a cozinha, por exemplo, é só procurar as caixas que foram nomeadas como "cozinha".
-    \\
-    \\
+    \par
     Variáveis funcionam exatamente como as caixas da sua mudança. Na linguagem C, \textbf{para cada tipo de informação, um tipo de variável deve ser utilizada para armazená-la}. Assim como em uma mudança não podemos guardar os utensílios da cozinha na mesma caixa em que guardamos nossas roupas, também não podemos guardar tipos diferentes de informações em uma mesma variável.
-    \\
-    \\
+    \par
     Na linguagem C existem:
     \\
     \begin{itemize}
-        \item Variáveis do tipo \textbf{\color{blue}{int}} que guardam números inteiros:
+        \item Variáveis do tipo {\fontfamily{qcr}\selectfont {\fontfamily{qcr}\selectfont \textbf{\color{blue}{int}}}} que guardam números inteiros:
         \\
-        {\color{blue}int} idade = 16;
-        \item Variáveis do tipo \textbf{\color{blue}{char}} que guardam caracteres:
+        {\fontfamily{qcr}\selectfont {\color{blue}int}} idade = 16;
+        \item Variáveis do tipo {\fontfamily{qcr}\selectfont \textbf{\color{blue}{char}}} que guardam caracteres:
         \\
-        {\color{blue}char} letra = '{\color{verde}a}';
-        \item Variáveis do tipo \textbf{\color{blue}{float}} que guardam números com ponto decimal:
+        {\fontfamily{qcr}\selectfont {\color{blue}char}} letra = '{\color{verde}a}';
+        \item Variáveis do tipo {\fontfamily{qcr}\selectfont \textbf{\color{blue}{float}}} que guardam números com ponto decimal:
         \\
-        {\color{blue}float} altura = 1.70;
+        {\color{blue}{\fontfamily{qcr}\selectfont float}} altura = 1.70;
     \end{itemize}
     \begin{center}
         \textbf{\color{red}ATENÇÃO!}
     \end{center}
-    Nada nos impede de armazenar um número inteiro em uma variável do tipo \textit{float}, afinal, um número inteiro também está dentro do conjunto dos números racionais (números com vírgula).
-    \\
-    \\
-    Da mesma forma, também podemos guardar um número decimal em uma variável do tipo \textit{int}, mas nesse caso, apenas o número inteiro será armazenado, a parte decimal será ignorada. Por fim, também é possível armazenar números inteiros e números com vírgula em uma variável do tipo \textit{char}, porém, o valor armazenado será considerado como caractere, e não como número.
-    \\
-    \\
-    \textit{Mas como assim? Agora fiquei confuso! Antes você disse que só era possível guardar valores de acordo com o tipo de variável. Números inteiros em variáveis do tipo {\color{blue}int}, números com casa decimal em variáveis do tipo {\color{blue}float} e caracteres em variáveis do tipo {\color{blue}char}. E agora você me diz que eu posso guardar qualquer coisa dentro de uma variável do tipo {\color{blue}char}.}
-    \\
-    \\
-    Pois é, meu caro amigo! Essa é uma das pegadinhas da linguagem C. Respondendo a sua pergunta, sim, é possível guardar números em uma variável do tipo {\color{blue}char}, mas isso não significa que você podera fazer operações matemáticas com valores armazenados em uma variável do tipo {\color{blue}char}, porque ela será estendida como um caractere. Mas isso é assunto para a nossa próxima seção.
+    \par
+    Nada nos impede de armazenar um número inteiro em uma variável do tipo {\color{blue}{\fontfamily{qcr}\selectfont float}}, afinal, um número inteiro também está dentro do conjunto dos números racionais (números com vírgula).
+    \par
+    Da mesma forma, também podemos guardar um número decimal em uma variável do tipo {\color{blue}{\fontfamily{qcr}\selectfont int}}, mas nesse caso, apenas o número inteiro será armazenado, a parte decimal será ignorada. Por fim, também é possível armazenar números inteiros e números com vírgula em uma variável do tipo {\color{blue}{\fontfamily{qcr}\selectfont char}}, porém, o valor armazenado será considerado como caractere, e não como número.
+    \par
+    \textit{Mas como assim? Agora fiquei confuso! Antes você disse que só era possível guardar valores de acordo com o tipo de variável. Números inteiros em variáveis do tipo {\color{blue}{\fontfamily{qcr}\selectfont int}}, números com casa decimal em variáveis do tipo {\color{blue}{\fontfamily{qcr}\selectfont float}} e caracteres em variáveis do tipo {\color{blue}{\fontfamily{qcr}\selectfont char}}. E agora você me diz que eu posso guardar qualquer coisa dentro de uma variável do tipo {\color{blue}{\fontfamily{qcr}\selectfont char}}.}
+    \par
+    Pois é, meu caro amigo! Essa é uma das pegadinhas da linguagem C. Respondendo a sua pergunta, sim, é possível guardar números em uma variável do tipo {\color{blue}{\fontfamily{qcr}\selectfont char}}, mas isso não significa que você podera fazer operações matemáticas com valores armazenados em uma variável do tipo {\color{blue}{\fontfamily{qcr}\selectfont char}}, porque ela será estendida como um caractere. Mas isso é assunto para a nossa próxima seção.
     \begin{center}
         \subsection{Declaração de Variáveis}
     \end{center}
+    \par
     Agora que entendemos que cada variável armazena um tipo de dado, devemos aprender a declarar uma variável de acordo com o tipo dela. Esse é o primeiro passo para utilizarmos uma variável em nosso código, sem ele, a compilação apresentará falhas.
-    \\
-    \textbf{Lembrando: }compilação é a fase em que o computador olha o seu código e verifica se não existem erros de sintaxe em relação à linguagem que você escreveu.
-    \\
+    \par
+    \textbf{Lembrando: }compilação é a fase em que o computador olha o seu código e verifica se não existem erros de sintaxe em relação à linguagem que você escreveu. \\
     \begin{center}
-        EXEMPLO I) \\
-        Neste exemplo iremos declarar uma variável do tipo inteira ({\color{blue}int}) chamada 'distancia'.
+    EXEMPLO I)        
     \end{center}
+    \par
+    Neste exemplo iremos declarar uma variável do tipo {\color{blue}{\fontfamily{qcr}\selectfont int}} chamada 'distancia'.
+    \\
+    \\
+    {\fontfamily{qcr}\selectfont 
     {\color{cinza}1}\quad{\color{blue}\#include} <Sparki.h>\\
     {\color{cinza}2}\\
     {\color{cinza}3}\quad{\color{blue}int} distancia; {\color{cinza}//declarando a variavel distancia do tipo int}\\
@@ -212,10 +310,14 @@ E aí?! Pronto pra começar?
     {\color{cinza}10}\quad\{\\
     {\color{cinza}11}\quad\quad distancia=10; {\color{cinza}//atribuindo o valor de 10 (int) para a variavel distancia}\\
     {\color{cinza}12}\quad\}
+    }
     \begin{center}
-        EXEMPLO 2)\\
-        Neste exemplo iremos fazer o código diferente ao anterior mas que faz a mesma coisa.
+        EXEMPLO II)\\
     \end{center}
+    \par
+    Neste exemplo iremos fazer o código diferente ao anterior mas que faz a mesma coisa. \\
+    \\
+    {\fontfamily{qcr}\selectfont 
     {\color{cinza}1}\quad{\color{blue}\#include} <Sparki.h>\\
     {\color{cinza}2}\\
     {\color{cinza}3}\quad{\color{blue}int} distancia=10; {\color{cinza}//declarando a variavel distancia como int e atribuindo o valor 10 a ela}\\
@@ -224,7 +326,1181 @@ E aí?! Pronto pra começar?
     {\color{cinza}6}\quad\{\\
     {\color{cinza}7}\quad\}\\
     {\color{cinza}8}\\
-    {\color{cinza}9}\quad{\color{blue}void} loop()
+    {\color{cinza}9}\quad{\color{blue}void} loop()\\
+    {\color{cinza}10}\quad\{ \\
+    {\color{cinza}11}\quad\} \\
+    }
     \\
-    Geralmente, optamos por declarar por uma variável fora do {\color{blue}void} setup() e do {\color{blue}{void}} loop(), pois, assim, podemos utilizá-la em qualquer lugar do código, mas também é possível declará-la dentro do {\color{blue}void} setup() ou {\color{blue}{void}} loop(). A diferença é que, caso você declare uma variável dentro do {\color{blue}{void}} loop(), apenas poderá utilizá-la dentro do {\color{blue}{void}} loop();
+    \par
+    Geralmente, optamos por declarar por uma variável fora do {\fontfamily{qcr}\selectfont {\color{blue}void} setup()} e do {\fontfamily{qcr}\selectfont {\color{blue}{void}} loop()}, pois, assim, podemos utilizá-la em qualquer lugar do código, mas também é possível declará-la dentro do {\fontfamily{qcr}\selectfont {\color{blue}void} setup()} ou {\fontfamily{qcr}\selectfont {\color{blue}{void}} loop()}. A diferença é que, caso você declare uma variável dentro do {\fontfamily{qcr}\selectfont {\color{blue}{void}} loop()}, apenas poderá utilizá-la dentro do {\fontfamily{qcr}\selectfont {\color{blue}{void}} loop()};
+    \begin{center}
+        \subsection{Operações entre variáveis}
+    \end{center}
+    \par
+    Vejamos alguns exemplos de operações entre números inteiros.
+    \begin{center}
+        EXEMPLO I)\\
+    \end{center}
+    \\
+    {\fontfamily{qcr}\selectfont 
+    {\color{cinza}1}\quad{\color{blue}\#include} <Sparki.h>\\
+    {\color{cinza}2}\\
+    {\color{cinza}3}\quad{\color{blue}int} valor1 = 10;\\
+    {\color{cinza}4}\quad{\color{blue}int} valor2 = 4;\\
+    {\color{cinza}5}\\
+    {\color{cinza}6}\quad{\color{blue}void} setup()\\
+    {\color{cinza}7}\quad\{\\
+    {\color{cinza}8}\quad\}\\
+    {\color{cinza}9}\\
+    {\color{cinza}10}\quad{\color{blue}void} loop()\\
+    {\color{cinza}11}\quad\{\\
+    {\color{cinza}12}\quad\quad sparki.clearLCD();\\
+    {\color{cinza}13}\\
+    {\color{cinza}14}\quad\quad sparki.print ({\color{verde}''valor 1 = ''});\\
+    {\color{cinza}15}\quad\quad sparki.println(valor1);\\
+    {\color{cinza}16}\\
+    {\color{cinza}17}\quad\quad sparki.print({\color{verde}''valor 2 = ''});\\
+    {\color{cinza}18}\quad\quad sparki.println(valor2);\\
+    {\color{cinza}19}\\
+    {\color{cinza}20}\quad\quad sparki.print({\color{verde}''valor1 + valor2 = ''});\\
+    {\color{cinza}21}\quad\quad sparki.println(valor1 + valor2);\\
+    {\color{cinza}22}\\
+    {\color{cinza}23}\quad\quad sparki.print({\color{verde}''valor1 - valor2)''};\\
+    {\color{cinza}24}\quad\quad sparki.prinln(valor1 - valor2);\\
+    {\color{cinza}25}\\
+    {\color{cinza}26}\quad\quad sparki.print({\color{verde}''valor1 * valor2''});\\
+    {\color{cinza}27}\quad\quad sparki.println(valor1 * valor2);\\
+    {\color{cinza}28}\\
+    {\color{cinza}29}\quad\quad sparki.print({\color{verde}''valor1 / valor2''});\\
+    {\color{cinza}30}\quad\quad sparki.print(valor1 / valor2);\\
+    {\color{cinza}31}\\
+    {\color{cinza}32}\quad\quad sparki.updateLCD();\\
+    {\color{cinza}33}\quad\quad delay(1000);\\
+    {\color{cinza}34}\quad\}}
+    \\
+    \par 
+    No código acima podemos observar que as variáveis foram declaradas nas \textbf{linhas 1 e 2}. Nas \textbf{linhas 14 e 17} utilizamos a função sparki.print para imprimir os textos {\fontfamily{qcr}\selectfont {\color{verde}'valor 1 ='}} e {\fontfamily{qcr}\selectfont {\color{verde}'valor 2 ='}}. Já nas \textbf{15 e 18} utilizamos a função sparki.print para imprimir os valores das variáveis na tela LCD.
+    \par
+    Para efetuar a operação de adição entre variáveis utilizamos o operador de adição {\fontfamily{qcr}\selectfont +}, como mostrando na {\textbf{linha 21}}. Da mesma forma, para efetuar a operação de subtração utilizamos o operador de subtração {\fontfamily{qcr}\selectfont -}, como podemos ver na {\textbf{linha 24}}. Para as operações de multiplicação e divisão, utilizamos os operadores {\fontfamily{qcr}\selectfont *} e {\fontfamily{qcr}\selectfont /}, conforme as {\textbf{linhas 27 e 30}}.
+    \par
+    Você deve ter notado que a última linha apresentada na tela LCD não apresenta o resultado correto da operação, né? Afinal, 10 dividido por 4 é igual a 2,5, e não 2.
+    \par
+    \textit{Ah, disso eu lembro! Você disse na seção anterior que variáveis do tipo {\fontfamily{qcr}\selectfont\color{blue}int} não guardam a casa decimal do valor. Então foi por isso que a operação não mostrou o resultado correto.} 
+    \par
+    Muito bem lembrado! Se a operação fosse entre variáveis do tipo {\fontfamily{qcr}\selectfont\color{blue}float} o valor correto teria sido apresentado na tela LCD.
+    \par
+    Ainda existe mais uma forma de efetuar operações de adição e subtração entre uma mesma variável do tipo {\fontfamily{qcr}\selectfont\color{blue}int}. Imagine que desejamos somar \textbf{6} à variável {\fontfamily{qcr}\selectfont distancia} e depois disso imprimiremos o novo valor da variável na tela LCD. Podemos fazer isso de duas maneiras, vejamos o exemplo abaixo.
+    \begin{center}
+        EXEMPLO III)
+    \end{center}
+    {\fontfamily{qcr}\selectfont 
+    {\color{cinza}1}\quad{\color{blue}\#include} <Sparki.h>\\
+    {\color{cinza}2}\quad{\color{blue}void} setup()\\
+    {\color{cinza}3}\quad\{\\
+    {\color{cinza}4}\quad\}\\
+    {\color{cinza}5}\\
+    {\color{cinza}6}\quad{\color{blue}void} loop()\\
+    {\color{cinza}7}\quad\{\\
+    {\color{cinza}8}\quad\quad sparki.clearLCD();\\
+    {\color{cinza}9}\\
+    {\color{cinza}10}\quad\quad{\color{blue}int} distancia=10;\\
+    {\color{cinza}11}\quad\quad sparki.print({\color{verde}''distancia=''});\\
+    {\color{cinza}12}\quad\quad sparki.println(distancia);\\
+    {\color{cinza}13}\quad\quad distancia=distancia+1;\\
+    {\color{cinza}14}\quad\quad sparki.print({\color{verde}''A nova distancia é:''});\\
+    {\color{cinza}15}\quad\quad sparki.println(distancia);\\
+    {\color{cinza}16}\\
+    {\color{cinza}17}\quad\quad{\color{blue}int} distancia=10;\\
+    {\color{cinza}18}\quad\quad sparki.print({\color{verde}''distancia=''});\\
+    {\color{cinza}19}\quad\quad sparki.println(distancia);\\
+    {\color{cinza}20}\quad\quad distancia++;\\
+    {\color{cinza}21}\quad\quad sparki.print({\color{verde}''A nova distancia é:''});\\
+    {\color{cinza}22}\quad\quad sparki.println(distancia);\\
+    {\color{cinza}23}\quad\quad sparki.updateLCD();\\
+    {\color{cinza}24}\quad\quad delay(1000);\\
+    {\color{cinza}25}\quad\}}
+    \\
+    \par
+    O código apresentado acima mostra na tela LCD o mesmo resultado duas vezes, porém, a operação é feita de formas diferentes. Na \textbf{linha 13} a operação é feita de forma convencional. Na {\textbf{linha 20}} o atalho {\fontfamily{qcr}\selectfont {variável++}} é utilizado, que consiste em somar 1 ao valor anterior da variável. Ou seja, se a variável declarada armazenasse o valor {\textbf{19}}, após a utilização do código {\fontfamily{qcr}\selectfont variável++}, o novo valor da variável seria {\textbf{20}}.
+    \par
+    Assim como no exemplo anterior, também podemos utilizar a mesma estrutura do código acima para fazer a operação que subtrai 1 da variável. Aepnas precisamos trocar o operador {\fontfamily{qcr}\selectfont ++} pelo operador {\fontfamily{qcr}\selectfont --}. No caso da subtração, o "atalho" consiste em {\fontfamily{qcr}\selectfont variavel- -}.
+    \begin{center}
+        EXEMPLO IV)
+    \end{center}
+    \par
+    Neste exemplo, iremos juntar o nosso conhecimento em LCD com o de varáveis.
+    \\
+    \\
+    {\fontfamily{qcr}\selectfont 
+    {\color{cinza}1}\quad{\color{blue}\#include} <Sparki.h>\\
+    {\color{cinza}2}\quad{\color{blue}void} setup()\\
+    {\color{cinza}3}\quad\{\\
+    {\color{cinza}4}\quad\}\\
+    {\color{cinza}5}\\
+    {\color{cinza}6}\quad{\color{blue}void} loop()\\
+    {\color{cinza}7}\quad\{\\
+    {\color{cinza}8}\quad\quad{\color{blue}int} var = 10;\\
+    {\color{cinza}9}\quad\quad sparki.clearLCD();\\
+    {\color{cinza}10}\quad\quad sparki.println({\color{verde}''Valor da variavel var:'')};\\
+    {\color{cinza}11}\quad\quad sparki.print(var);\\
+    {\color{cinza}12}\quad\quad sparki.updateLCD();\\
+    {\color{cinza}13}\quad\quad delay(1000);\\
+    {\color{cinza}14}\quad\}}\\
+    \par
+    Note que, quando vamos imprimir o valor que uma variável está armazenando, devemos escrever o nome dela como parâmetro sem as aspas. Mas, se quisermos imprimir apenas os caracteres do jeito que está escrito nos parâmetros, devemos escrever a mensagem desejada entre aspas.
+    \begin{center}
+        \subsection{Exercícios}
+    \end{center}
+    1) Ajuste o código do Exemplo I da seção de "Operações entre variáveis" para que todos os valores das operações sejam apresentados corretamente na tela LCD, ou seja, apresentando também a parte decimal do resultado.
+    \\
+    \\
+    2) Escreva um código que apresente um contador na tela LCD (contadores são ciclos de repetição de um código, no qual acumulam seu próprio valor, acrescentando 1 a cada execução do programa. Ex: 0 + \textbf{1} -> 1 + \textbf{1} -> 2 + \textbf{1} -> 3 + \textbf{1} -> 4 ...).
+    \\
+    \\
+    %\textbf{DESAFIO}: Com os conhecimentos adquiridos até aqui. escreva um código que imprima na tela LCD um cronômetro descrescente de 5 a 0. Ao chegar em 0, o \textit{Sparki} deve se movimentar em linha reta por 1 metro. Após isso, o \textit{Sparki} deve parar e aguardar 10 segundos antes de executar a tarefa novamente.% COLOCAR ESSA PARTE DEPOIS DA EXPLICAÇÃO LCD
+
+    \section{\textbf{Ultrassom}}
+\begin{center}
+    \subsection{Introdução}    
+\end{center}
+    \par
+    No capítulo de ultrassom iremos tratar dos "olhos" do \textit{Sparki}. Eles estão presentes na plaquinha azul, naquilo que você pode ter considerado ser a cabeça dele. Embora, à primeira vista, os dois "olhos" pareçam câmeras feitas para que nosso robozinho possua visão, na verdade eles fazem parte de um sensor bem diferente, que está mais associado com a audição.
+    \par
+    Iremos então entender o que é esse sensor, como ele funciona e como podemos utilizá-lo facilmente, de forma que o \textit{Sparki} seja capaz de desviar de obstáculos enquanto anda. 
+    
+\begin{center}
+       \subsection{Sensor Ultrassônico}
+\end{center}
+    \par
+    O funcionamento do sensor é muito simples. O que muitos podem ter achado se tratar de duas câmeras, na verdade são um alto-falante e um microfone. O alto-falante emite uma onda sonora de alta frequência, alta demais para que nós humanos sejamos capazes de escutá-la. Essa onda de som é refletida assim que vai ao encontro de algum objeto e retorna para o microfone.
+\par
+\textit{Mas qual a utilidade de se emitir um som e depois escutá-lo de volta?}
+\par
+A funcionalidade não está no som em si, mas no tempo que demorou para que a onda sonora retornasse para o sensor. Essa informação de tempo é então utilizada para calcular a distância do sensor até o objeto que refletiu a onda de volta.
+\par
+O sensor ultrassônico é utilizado para obter a distância entre o robô e algum objeto à sua frente. Mas nem sempre conseguimos encontrar essa distância como esperado. Isso ocorre pois, às vezes, o objeto não está bem posicionado, logo, não reflete o som de volta para o microfone, ou então ele absorve todo o som, o que pode acontecer se ele for muito macio.
+\begin{center}
+    \subsection{Aplicações no Cotidiano}    
+\end{center}
+\begin{center}
+    \subsubsection{Ultrassonografia}    
+\end{center}
+    \par
+    A Ultrassonografia, também conhecida por Ecografia e Ultrassom, é um exame de diagnóstico que serve para visualizar em tempo real qualquer órgão ou tecido do corpo. Ela é comumente usada para observar o desenvolvimento do feto durante a gravidez.
+    \par
+    Sabe aquelas imagens cinzas borradas que ninguém além do médico é capaz de compreender? Elas são feitas utilizando o ultrassom.
+\begin{center}
+    \subsubsection{Ecolocalização}    
+\end{center}
+    \par
+    Embora não seja utilizada por seres humanos, a ecolocalização ou biossonar é muito importante na vida de diversos animais como morcegos, golfinhos e baleias. Eles são seres capazes de emitir ondas de alta frequência e cronometrar o tempo levado até que consigam escutar o seu próprio eco, assim, são capazes de conhecer seus arredores mesmo sem o uso da visão.
+\begin{center}
+    \subsubsection{Sonares}    
+\end{center}
+    \par
+    Sonares são muito utilizados por navios e submarinos para detectar a presença de outros corpos debaixo da água. Seu funcionamento é idêntico ao de um biossonar utilizado por uma baleia, por exemplo. Sonares diferem dos radares pois os radares utilizam ondas de rádio para medir a distância.
+\begin{center}
+    \subsection{Função}    
+\end{center}
+    \par
+    Para podermos utilizar o sensor ultrassônico presente no \textit{Sparki}, tudo o que precisamos fazer é escrever a função {\fontfamily{qcr} \selectfont sparki.ping()}, que ativará o sensor. Como já dito, o sensor serve para medir a distância, logo, quando o ativamos, espera-se que recebamos algum valor de volta que indique qual é essa distância. A função{\fontfamily{qcr} \selectfont sparki.ping()} já faz os cálculos necessários e nos retorna o valor da distância em centímetros.
+    \par
+    \textit{A função então nos devolve um valor, mas como que eu vejo isso? Onde que ele vai me falar qual a distância que ele mediu? Ele escreve em algum lugar?}
+    \par
+    AHA! Acabamos de chegar na parte importante desse capítulo, as funções que retornam valores. O \textit{Sparki} irá escrever o valor que o sensor encontrou no local que a gente determinar para isso, mas claro que isso não quer dizer que podemos simplesmente falar para ele escrever a resposta num papel que ele irá fazer (possível, mas o código para isso seria muito grande).
+    \par
+    Uma forma interessante de resolver este conflito é a seguinte: nós criamos o local onde ele deve escrever a resposta, mas esse local não pode ser qualquer um, ele tem que ser uma variável. Sempre que criamos uma variável temos que definir também o tipo dela, e como, no nosso caso, estamos trabalhando apenas com centímetros é mais adequado criar uma variável do tipo {\color{blue}{\fontfamily{qcr}\selectfont int}}, ou seja, que armazena números inteiros.
+    \par
+    O código que mostra como fazemos isso está escrito logo abaixo:
+    \\
+    \\
+    {\fontfamily{qcr}\selectfont 
+    {\color{cinza}1}\quad{\color{blue}\#include} <Sparki.h>\\
+    {\color{cinza}2}\quad\\
+    {\color{cinza}3}\quad{\color{blue}int} distancia\_em\_cm;}\\
+    {\color{cinza}4}\quad\\
+    {\color{cinza}5}\quad{\color{blue}void} setup()\\
+    {\color{cinza}6}\quad\{\\
+    {\color{cinza}7}\quad\}\\
+    {\color{cinza}8}\quad\\
+    {\color{cinza}9}\quad{\color{blue}void} loop()\\
+    {\color{cinza}10}  \{\\
+    {\color{cinza}11}\quad\quad distancia\_em\_cm = sparki.ping();\\
+    {\color{cinza}12}\quad\quad delay(300);\\
+    {\color{cinza}13}  \}\\
+    \par
+    Nesse código estamos dizendo que o \textit{Sparki} deve executar a função {\fontfamily{qcr} \selectfont sparki.ping()} e salvar o valor que ela retornar dentro da nossa variável {\fontfamily{qcr} \selectfont distancia\_em\_cm}. Agora que temos a nossa distância salva dentro de uma variável, podemos trabalhar com ela livremente para fazermos o que quiser, como fazer ele escrever o valor numa folha de papel.
+    \par
+    É importante notar a presença da função {\fontfamily{qcr} \selectfont  delay()} no código, pois o funcionamento do sensor não é tão rápido quanto a velocidade de processamento do nosso robô, então precisamos dar um pequeno intervalo de tempo para que o sensor possa funcionar sem erros.
+\begin{center}
+    \subsection{Servo motor}    
+\end{center}
+    \par
+    Se considerarmos o sensor ultrassônico como sendo a "cabeça" do robô, é muito útil que tenhamos também um "pescoço" que sirva para movimentarmos a "cabeça", então surge a necessidade de um outro servo motor no \textit{Sparki}. Você deve se lembrar da garra apresentada no capítulo de Movimentação. Assim como o nosso "pescoço", a garra também funciona por meio da ação de um servo motor, mas afinal o que ele é?
+    \par
+    Um servo motor é um motor que tem a capacidade de girar o seu eixo em ângulos precisos de até 90º ou 180º normalmente, sendo que o servo motor no qual o sensor ultrassônico está acoplado é capaz de girar seu eixo em até 180º. Ele é muito útil para movimentar braços robóticos, por exemplo. Nesse caso, não é necessária a realização de voltas completas e a precisão torna-se muito importante. No nosso caso, utilizamos ele para girar o sensor, e assim, podermos medir distâncias em outras direções sem ter que utilizar as rodas para girar o robô, infelizmente não temos como fazer o \textit{Sparki} olhar para cima ou para baixo utilizando um servo motor apenas.
+\begin{center}
+    \subsection{Função}    
+\end{center}
+    \par
+    Agora que sabemos da existência do servo motor, precisamos saber como utilizá-lo. Para começar, devemos ativá-lo escrevendo a função {\fontfamily{qcr} \selectfont sparki.servo()}. Esta função deve receber um valor de angulação em graus, que determina o quanto ele deve girar. Este valor deve estar entre -90º e 90º (sendo valores negativos para a esquerda e positivos para a direita) e o valor pode ser um número quebrado, isto é, o argumento da função é do tipo {\color{blue}{\fontfamily{qcr}\selectfont float}}.
+    \par
+    Para facilitar a nossa vida, a função {\fontfamily{qcr} \selectfont sparki.servo()} já vem com 3 valores predefinidos dos ângulos mais utilizados: {\fontfamily{qcr} \selectfont SERVO\_LEFT} (-90º), {\fontfamily{qcr} \selectfont SERVO\_CENTER} (0º) e {\fontfamily{qcr} \selectfont SERVO\_RIGHT} (90º). Assim, tudo o que precisamos fazer é escrever {\fontfamily{qcr} \selectfont SERVO\_[]} com o sentido desejado como argumento que o \textit{Sparki} se encarrega de colocar o sensor na posição correta.
+    \par
+    Abaixo temos um código que faz com que o \textit{Sparki} meça a distância dele para os objetos na sua esquerda, frente, direita e diagonais esquerda e direita:
+    \\
+    \\
+    {\fontfamily{qcr}\selectfont 
+    {\color{cinza}1}\quad{\color{blue}\#include} <Sparki.h>\\
+    {\color{cinza}2}\quad\\
+    {\color{cinza}3}\quad{\color{blue}int} distancia\_esquerda;\\
+    {\color{cinza}4}\quad{\color{blue}int}  distancia\_direita;\\
+    {\color{cinza}5}\quad{\color{blue}int} distancia\_frente;\\
+    {\color{cinza}6}\quad{\color{blue}int} distancia\_diagonal\_esquerda;\\
+    {\color{cinza}7}\quad{\color{blue}int} distancia\_diagonal\_direita;\\
+    {\color{cinza}8}\quad\\
+    {\color{cinza}9}\quad{\color{blue}void} setup()\\
+    {\color{cinza}10} \{\\
+    {\color{cinza}11}\quad\quad
+    sparki.servo(SERVO\_LEFT); 
+    {\color{cinza}//gira ára a posição -90 graus}\\
+    {\color{cinza}12}\quad\quad delay(500);\\
+    {\color{cinza}13}\quad\quad
+    distancia\_esqueda = sparki.ping();\\
+    {\color{cinza}14}\quad\quad
+    sparki.servo(-45); 
+    {\color{cinza}//gira ára a posição -45 graus}\\
+    {\color{cinza}15}\quad\quad delay(500);\\
+    {\color{cinza}16}\quad\quad
+    distancia\_diagonal\_esqueda = sparki.ping();\\
+    {\color{cinza}17}\quad\quad delay(500);\\
+    {\color{cinza}18}\quad\quad
+    sparki.servo(SERVO\_CENTER); 
+    {\color{cinza}//gira ára a posição 0 graus}\\
+    {\color{cinza}19}\quad\quad delay(500);\\
+    {\color{cinza}20}\quad\quad
+    distancia\_frente = sparki.ping();\\
+    {\color{cinza}21}\quad\quad delay(500);\\
+    {\color{cinza}22}\quad\quad
+    sparki.servo(45); 
+    {\color{cinza}//gira ára a posição 45 graus}\\
+    {\color{cinza}23}\quad\quad delay(500);\\
+    {\color{cinza}24}\quad\quad
+    distancia\_diagonal\_direita = sparki.ping();\\
+    {\color{cinza}25}\quad\quad delay(500);\\
+    {\color{cinza}26}\quad\quad
+    sparki.servo(SERVO\_RIGHT); 
+    {\color{cinza}//gira ára a posição 90 graus}\\
+    {\color{cinza}27}\quad\quad delay(500);\\
+    {\color{cinza}28}\quad\quad
+    distancia\_direita = sparki.ping();\\
+    {\color{cinza}29}\quad\quad delay(500);\\
+    {\color{cinza}30} \}\\
+    {\color{cinza}31}\\
+    {\color{cinza}32}\quad{\color{blue}void} loop()\\
+    {\color{cinza}33} \{\\
+    {\color{cinza}34} \}}\\
+
+\section{\textbf{If e else}}
+
+\begin{center}
+\subsection{Introdução}
+\end{center}
+
+\par
+Neste capítulo aprofundaremos nosso estudo de programação por meio de comandos que permitem a tomada de decisão, ou seja, estruturas auxiliares que estabelecem uma condição para a execução de um comando principal. Ficou confuso? Não se preocupe, vou explicar a seguir!
+
+\begin{center}
+\subsection{Estruturas de decisão}
+\end{center}
+\par
+Desde o momento em que acordamos, estamos tomando decisões, às vezes até sem perceber! Por exemplo, optar por ficar alguns minutos a mais na cama e adiar o despertador ou decidir levantar no instante em que ele tocar. Vamos supor que amanhã você tem uma prova muito importante às 8 horas da manhã, o fato de escolher ignorar o despertador e dormir mais pode resultar em consequências, como perder aquela prova de final de semestre e, possivelmente, acabar ficando com nota baixa. Como não é isso que queremos, é sempre bom acordar cedo em dias que tivermos provas pela manhã.
+\par
+Estabelecemos uma condição para acordar cedo, você percebeu? A condição de acordar cedo é se houver uma prova pela manhã... É exatamente isso que faremos neste capítulo! Estabeleceremos condições para que o \textit{Sparki} realize determinada ação!
+
+\begin{center}
+            {\color{azulbebe}Para não esquecer!}\\
+            As estruturas de decisão que utilizaremos são "if" e "else", elas significam "se" e "senão" em inglês, respectivamente.
+\end{center}
+
+\begin{center}
+\subsection{Como utilizar "if" e "else"?}
+\end{center}
+
+\par
+A seguir temos exemplos de uso dessas estruturas:\\
+
+\begin{center}
+EXEMPLO I)
+\end{center}
+\par
+Exemplo de comparação de variáveis.
+\\
+\\
+{\fontfamily{qcr}\selectfont 
+{\color{cinza}1}\quad{\color{verde}if}(Condição 1)\\
+{\color{cinza}2}\quad\{\\
+{\color{cinza}3}\quad\quad Ação 1;\\
+{\color{cinza}4}\quad\}{\color{verde}else}\\
+{\color{cinza}5}\quad\{\\
+{\color{cinza}6}\quad\quad Ação 2;\\
+{\color{cinza}7}\quad\}}
+
+\par
+Esse exemplo significa que, se a "Condição 1" for verdadeira, o \textit{Sparki} executará a "Ação 1", senão, ele executará a "Ação 2". Utilizar o \texttt{else} como uma opção alternativa ao \texttt{if()} é optativo, ou seja, podem existir expressões condicionais apenas com \texttt{if()}.
+\par
+Reflita: A “Ação 1” e a “Ação 2” poderiam ser executadas sequencialmente, em apenas uma leitura desse código?
+\par
+A seguir temos uma tabela com todas as opções de execução do código desse primeiro exemplo: (Tente entender a tabela, apenas decorar pode te deixar confuso mais para frente)
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{Condição 1} & \textbf{Ação 1} & \textbf{Ação 2} \\
+        \hline
+        Verdadeira & Executa & Não executa \\
+        \hline
+        Falsa & Não executa & Executa \\
+        \hline
+    \end{tabular}
+\end{table}
+\\
+\begin{center}
+EXEMPLO II)
+\end{center}
+\par
+Exemplo da explicação. (Apenas para fins didáticos)
+\\
+\\
+{\fontfamily{qcr}\selectfont 
+{\color{cinza}1}\quad{\color{verde}if}(For dia de prova)\\
+{\color{cinza}2}\quad\{\\
+{\color{cinza}3}\quad\quad Acordar mais cedo;\\
+{\color{cinza}4}\quad\}{\color{verde} else}\\
+{\color{cinza}5}\quad\{\\
+{\color{cinza}6}\quad\quad Acordar no horário normal;\\
+{\color{cinza}7}\quad\}}
+\\
+\par
+Neste caso, se for o dia da prova, devemos acordar mais cedo e, se não for o dia da prova, devemos acordar no horário normal. A segunda ação apenas ocorre se a primeira não ocorrer, logo, essas duas ações não poderiam ser executadas sequencialmente, ou seja, em uma mesma verificação da condição de ser ou não dia de prova.\\
+
+\begin{center}
+EXEMPLO III)
+\end{center}
+\par
+Exemplo com “else if”. (Apenas para fins didáticos)
+\\
+\\
+{\fontfamily{qcr}\selectfont 
+{\color{cinza}1}\quad{\color{verde}if}(Condição 1)\\
+{\color{cinza}2}\quad\{\\
+{\color{cinza}3}\quad\quad Ação 1;\\
+{\color{cinza}4}\quad\}{\color{verde}else if}(Condição 2)\\
+{\color{cinza}5}\quad\{\\
+{\color{cinza}6}\quad\quad Ação 2;\\
+{\color{cinza}4}\quad\}{\color{verde}else}\\
+{\color{cinza}5}\quad\{\\
+{\color{cinza}6}\quad\quad Ação 3;\\
+{\color{cinza}7}\quad\}}
+\\
+\par
+Agora apareceram \texttt{else} e \texttt{if} em uma mesma linha, o que isso significa?
+
+\par
+Para entender os dois termos juntos, vamos revisar o significado deles separados. \texttt{else} significa: "se as condições anteriores forem falsas, executar o comando dentro das chaves". \texttt{if()} significa: "se a condição dentro dos parênteses for verdadeira, executar o comando dentro das chaves". Consequentemente, a expressão \texttt{else if()} implica na execução do comando apenas se as condições anteriores forem falsas e a condição dentro do parênteses for verdadeira.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \textbf{Condição 1} & \textbf{Ação 1} & \textbf{Condição 2} & \textbf{Ação 2} & \textbf{Ação 3} \\
+        \hline
+        Verdadeira & Executa & Falsa & Não executa & Não executa \\
+        \hline
+        Verdadeira & Executa & Verdadeira & Não executa & Não executa \\
+        \hline
+        Falsa & Não executa & Verdadeira & Executa & Não executa \\
+        \hline
+        Falsa & Não executa & Falsa & Não executa & Executa \\
+        \hline
+    \end{tabular}
+\end{table}
+\\
+\begin{center}
+EXEMPLO IV)
+\end{center}
+
+\par
+Imagine uma situação hipotética em que existam 3 compromissos na sua agenda, no mesmo dia e horário, e você terá que escolher apenas um, de acordo com a previsão do tempo. (Apenas para fins didáticos)
+\\
+\\
+{\fontfamily{qcr}\selectfont 
+{\color{cinza}1}\quad{\color{verde}if} (Estiver fazendo muito calor)\\
+{\color{cinza}2}\quad\{\\
+{\color{cinza}3}\quad\quad Ir ao clube;\\
+{\color{cinza}4}\quad\}{\color{verde}else if} (Estiver chovendo)\\
+{\color{cinza}5}\quad\{\\
+{\color{cinza}6}\quad\quad Ver um filme em casa;\\
+{\color{cinza}7}\quad\}{\color{verde}else if} (Estiver nevando)\\
+{\color{cinza}8}\quad\{\\
+{\color{cinza}9}\quad\quad Ir esquiar;\\
+{\color{cinza}10}\quad\}{\color{verde}else}\\
+{\color{cinza}11}\quad\{\\
+{\color{cinza}12}\quad\quad Ir ao cinema;\\
+{\color{cinza}13}\quad\}}
+\\
+\par
+Isshh... Agora ficou complicado! E se a previsão do tempo afirmar que vai chover e nevar nesse dia? Qual compromisso eu escolho?
+\par
+Essa é fácil! É necessário apenas observar qual das condições será lida primeiro nesse código, ou seja, o que vier primeiro! Como a condição "Estiver chovendo" aparece primeiro, o compromisso seria "Ver um filme em casa".
+\par
+E qual seria a condição para "Ir ao cinema"?
+\par
+A condição seria a negação das anteriores, neste caso, se não estivesse fazendo muito calor, nem chovendo, nem nevando.
+\par
+Uma curiosidade dessa estrutura condicional é que se escrevermos 1 dentro dos parênteses do \texttt{if()}, ele será verdadeiro e o que estiver dentro das chaves será executado. Assim, se escrevermos 0 dentro dos parênteses, o \texttt{if()} será falso e o que estiver dentro das chaves não será executado. Isso se dá porque a programação possui uma base binária, ou seja, ela é baseada em vários 1's e 0's, sendo 1 verdadeiro e 0 falso.
+
+
+\begin{center}
+\subsection{Operações de comparação}
+\end{center}
+\par
+Iremos aprender nesta seção os tipos de operadores que podemos utilizar para comparar dois valores ou incógnitas. Lembrando que eles devem ser utilizados apenas dentro do parênteses do \texttt{if()}. São eles:
+
+\begin{itemize}
+    \item \texttt{==} para verificar se os dois valores são iguais.
+    \item \texttt{!=} para verificar se os dois valores são diferentes.
+    \item \texttt{>} para verificar se o primeiro é maior que o segundo.
+    \item \texttt{>=} para verificar se o primeiro é maior que o segundo ou igual a ele.
+    \item \texttt{<} para verificar se o primeiro é menor que o segundo.
+    \item \texttt{<=} para verificar se o primeiro é menor que o segundo ou igual a ele.
+\end{itemize}
+
+\par
+Agora que você já entendeu como funcionam as expressões condicionais e os operadores de comparação, vamos para um exemplo de verdade!
+\\
+\begin{center}
+EXEMPLO 1)
+\end{center}
+
+Atribuiremos o valor 2042385 à variável \texttt{x} e queremos que o \textit{Sparki} responda se esse número é ímpar ou par. Para isso, utilizaremos a informação da sessão anterior sobre os 1's e os 0's.
+\\
+\\
+{\fontfamily{qcr}\selectfont
+{\color{cinza}1}\quad{\color{blue}\#include} <Sparki.h>\\
+{\color{cinza}2}\\
+{\color{cinza}3}\quad{\color{blue}void} setup()\\
+{\color{cinza}4}\quad\{\\
+{\color{cinza}5}\quad\quad sparki.clearLCD();\\
+{\color{cinza}6}\quad\quad {\color{verde}if} (x \% 2)\\
+{\color{cinza}7}\quad\quad \{\\
+{\color{cinza}8}\quad\quad\quad sparki.print({\color{verde}''O numero e impar.''});\\
+{\color{cinza}9}\quad\quad \}\\
+{\color{cinza}10}\quad\quad {\color{verde}else}\\
+{\color{cinza}11}\quad\quad \{\\
+{\color{cinza}12}\quad\quad\quad sparki.print({\color{verde}''O numero e par.''});\\
+{\color{cinza}13}\quad\quad \}\\
+{\color{cinza}14}\quad\quad sparki.updateLCD();\\
+{\color{cinza}15}\quad\quad delay(1000);\\
+{\color{cinza}16}\quad\}}
+\\
+\par
+Sabemos que o número 2042385 é ímpar pela regra da divisão por 2, que afirma que um número é divisível por 2 quando o último algarismo dele for divisível por 2. Nesse código, não utilizamos essa regrinha, mas sim o método mais tradicional, fazemos o \textit{Sparki} verificar se a divisão desse número por 2 é exata, ou seja, se o resto é 0. Assim, o \textit{Sparki} chega a mesma conclusão que chegamos, que o número 2042381 é ímpar, e imprime essa informação no LCD.
+\par
+Lembrando: O símbolo \texttt{\%} significa o resto da divisão do primeiro número pelo segundo. Exemplo:
+
+\begin{center}
+10 \% 2 = 0 e 10 \% 3 = 1
+\end{center}
+\\
+\begin{center}
+EXEMPLO 2)
+\end{center}
+\par
+Dessa vez, faremos com que o \textit{Sparki} responda se o número 2042385 é divisível por 3 e por 5.
+\\
+\\
+{\fontfamily{qcr}\selectfont
+{\color{cinza}1}\quad{\color{blue}\#include} <Sparki.h>\\
+{\color{cinza}2}\\
+{\color{cinza}3}\quad{\color{blue}void} setup()\\
+{\color{cinza}4}\quad\{\\
+{\color{cinza}5}\quad\quad sparki.clearLCD();\\
+{\color{cinza}6}\quad\quad {\color{verde}if}((x \% 3) == 0)\\
+{\color{cinza}7}\quad\quad \{\\
+{\color{cinza}8}\quad\quad\quad sparki.println({\color{verde}''O numero e divisivel por 3.''});\\
+{\color{cinza}10}\quad\quad \}{\color{verde}else}\\
+{\color{cinza}11}\quad\quad \{\\
+{\color{cinza}12}\quad\quad\quad sparki.println({\color{verde}''O numero nao e divisivel por 3.''});\\
+{\color{cinza}13}\quad\quad \}\\
+{\color{cinza}14}\quad\quad {\color{verde}if}((x \% 5) == 0)\\
+{\color{cinza}15}\quad\quad \{\\
+{\color{cinza}16}\quad\quad\quad sparki.print({\color{verde}''O numero e divisivel por 5.''});\\
+{\color{cinza}18}\quad\quad \}{\color{verde}else}\\
+{\color{cinza}19}\quad\quad \{\\
+{\color{cinza}20}\quad\quad\quad sparki.print({\color{verde}''O numero nao e divisivel por 5.''});\\
+{\color{cinza}21}\quad\quad \}\\
+{\color{cinza}22}\quad\quad sparki.updateLCD();\\
+{\color{cinza}23}\quad\quad delay(1000);\\
+{\color{cinza}24}\quad\}}
+\\
+\par
+Esse exemplo é parecido com o anterior, mas ele está aqui para mostrar que podemos inserir duas estruturas condicionais independentes em um mesmo código. As duas comparações para saber se o número é divisível por 3 e por 5 não dependem uma da outra, pois um número pode ser divisível por 3 e por 5 ao mesmo tempo, por isso que existem dois \texttt{if()} e dois \texttt{else}. Consequentemente, o \textit{Sparki} imprimirá duas mensagens na tela, na primeira linha: "O numero e divisivel por 3" e na segunda: "O numero e divisivel por 5".
+\\
+\begin{center}
+EXEMPLO 3)
+\end{center}
+\par
+Exemplo de comparação de variáveis.
+\\
+\\
+{\fontfamily{qcr}\selectfont 
+{\color{cinza}1}\quad{\color{blue}\#include} <Sparki.h>\\
+{\color{cinza}2}\quad{\color{blue}void} setup()\\
+{\color{cinza}3}\quad\{\\
+{\color{cinza}4}\quad\}\\
+{\color{cinza}5}\quad{\color{blue}void} loop()\\
+{\color{cinza}6}\quad\{\\
+{\color{cinza}7}\quad\quad{\color{blue}int} x = 10;\\
+{\color{cinza}8}\quad\quad{\color{blue}int} y = 100;\\
+{\color{cinza}9}\quad\quad sparki.clearLCD();\\
+{\color{cinza}10}\quad\quad{\color{verde}if}(x >= y) \{\\
+{\color{cinza}11}\quad\quad\quad sparki.print({\color{verde}''Condicao 1''});\\
+{\color{cinza}12}\quad\quad\} {\color{verde}else if}(y != (x * x)) \{\\
+{\color{cinza}13}\quad\quad\quad sparki.print({\color{verde}''Condicao 2''});\\
+{\color{cinza}14}\quad\quad\} {\color{verde}else if}((y / x) >= x) \{\\
+{\color{cinza}15}\quad\quad\quad sparki.print({\color{verde}''Condicao 3''});\\
+{\color{cinza}16}\quad\quad\} {\color{verde}else if}((y - 100) <= x) \{\\
+{\color{cinza}17}\quad\quad\quad sparki.print({\color{verde}''Condicao 4''});\\
+{\color{cinza}18}\quad\quad\}\\
+{\color{cinza}19}\quad\quad sparki.updateLCD();\\
+{\color{cinza}20}\quad\quad delay(1000);\\
+{\color{cinza}21}\quad\}}
+\\
+\par
+Você reparou que a disposição das chaves no código está diferente das utilizadas anteriormente? Os dois modos são válidos, sendo as chaves coladas no \texttt{if} ou em outra linha, mas é sempre bom manter um padrão, por isso, antes de começar um código, decida qual será a convenção utilizada. Então, já sabe o que o \textit{Sparki} fará ao ler este código? Vamos ver passo a passo:
+
+\begin{itemize}
+    \item \textbf{Condição 1)} \texttt{x >= y} \\
+    10 >= 100 \\
+    Essa afirmação é FALSA, logo, o \textit{Sparki} não executará a ação entre as chaves.
+    
+    \item \textbf{Condição 2)} \texttt{y != (x * x)} \\
+    100 != (10 * 10) \\
+    100 != 100 \\
+    Essa afirmação também é FALSA, por isso a ação não será executada.
+    
+    \item \textbf{Condição 3)} \texttt{(y / x) >= x} \\
+    (100 / 10) >= 10 \\
+    10 >= 10 \\
+    Essa afirmação é VERDADEIRA, logo, o \textit{Sparki} executará a ação entre as chaves, imprimirá no LCD "Condicao 3".
+    
+    \item \textbf{Condição 4)} Essa condição não será nem lida, pois ela só poderia ser executada se todos os \texttt{if()} anteriores, dentro dessa estrutura condicional, fossem falsos.
+\end{itemize}
+
+\par
+Lembrando: Sempre devemos executar a operação dentro dos parênteses antes dos operadores de comparação.
+
+\begin{center}
+    \subsection{Operadores lógicos}
+\end{center}
+\par
+Nesta seção, iremos aprender a lidar com comparações que envolvem mais de um fator a ser analisado e, para isso, utilizaremos o início da teoria da Álgebra Booleana, criada por George Boole. Na Álgebra de Boole, existem 3 tipos de operadores lógicos: E, OU e NÃO, cada um com uma funcionalidade própria. Eles devem ser usados dentro de condicionais \texttt{if()} para ligar duas comparações ou para negar uma ou mais comparações.
+
+\begin{center}
+    \subsubsection{E (AND)}
+\end{center}
+\par
+Este operador depende de pelo menos dois "resultados" de afirmações, por exemplo, vamos supor que você quer ir à piscina, mas você apenas irá se estiver fazendo sol E se a piscina estiver limpa. Então, a 1ª afirmação é: se estiver fazendo sol e a 2ª afirmação é: se a piscina estiver limpa. O operador AND vai funcionar como uma "ponte" de ligação entre essas duas afirmações.
+\par
+A condição estabelecida pelo \texttt{if()}, com o AND entre as afirmações, será VERDADEIRA apenas quando as afirmações forem ambas VERDADEIRAS.
+\par
+Então o AND vai ser uma comparação entre duas comparações?? Que confuso!
+\par
+Mais ou menos... É mais certo dizer que o AND irá realizar uma operação entre as duas comparações/afirmações. Utilizando o exemplo anterior, as duas afirmações têm que ser verdadeiras, ou seja, 1) tem que estar fazendo sol e 2) a piscina tem que estar limpa para que a comparação seja verdadeira e você possa ir à piscina.
+\\
+\begin{center}
+    EXEMPLO 0)
+\end{center}
+\\
+\\
+{\fontfamily{qcr}\selectfont 
+{\color{cinza}1}\quad{\color{verde}if}(Fizer sol AND Piscina estiver limpa)\\
+{\color{cinza}2}\quad\{\\
+{\color{cinza}3}\quad\quad Ir à piscina();\\
+{\color{cinza}1}\quad\}{\color{verde}else}\\
+{\color{cinza}2}\quad\{\\
+{\color{cinza}3}\quad\quad Não ir à piscina();\\
+{\color{cinza}2}\quad\}\\}
+\\
+\par
+Se a comparação 1 der VERDADEIRA e a comparação 2 der FALSA, o \texttt{if()} não será realizado e você não irá à piscina. Porém, se as duas comparações derem VERDADEIRAS, o \texttt{if()} será realizado e você poderá ir à piscina.
+\par
+Agora, vamos fazer um esquema com todas as possibilidades de combinação entre duas comparações e ver o resultado final:
+
+\begin{itemize}
+    \item VERDADEIRO AND VERDADEIRO -> Resultado: VERDADEIRO
+    \item VERDADEIRO AND FALSO -> Resultado: FALSO
+    \item FALSO AND VERDADEIRO -> Resultado: FALSO
+\end{itemize}
+\par
+Lembrando: Resultado: VERDADEIRO, significa que o if() será executado. Resultado: FALSO, significa que o if() não será executado.
+\par
+Tá, mas como eu aplico isso na programação?
+\par
+Na programação, utilizamos os caracteres \&\& para simbolizar o AND. Aqui temos um exemplo:
+\\
+\begin{center}
+EXEMPLO 1)
+\end{center}
+\par
+Neste exemplo, serão criadas 3 variáveis para armazenar a idade de 3 crianças: o Enzo, que tem 1 ano, a Valentina, que tem 2 anos, e a Sofia com 3 anos. Se a idade das 3 crianças forem iguais, o Sparki andará para frente, se a Sofia for a mais velha e o Enzo o mais novo, o Sparki andará para trás, e, por último, se as duas condições anteriores forem falsas, o Sparki ficará parado.
+\\
+\\
+{\fontfamily{qcr}\selectfont 
+    {\color{cinza}1}\quad{\color{blue}\#include} <Sparki.h>\\
+    {\color{cinza}2}\quad{\color{blue}void} setup()\{\\
+    {\color{cinza}3}\quad\}\\
+    {\color{cinza}4}\quad{\color{blue}void} loop()\{\\
+    {\color{cinza}5}\quad\quad {\color{blue}int} idade\_enzo = 1;\\
+    {\color{cinza}6}\quad\quad {\color{blue}int} idade\_valentina = 2;\\
+    {\color{cinza}7}\quad\quad {\color{blue}int} idade\_sofia = 3;\\
+    {\color{cinza}8}\quad\quad {\color{verde}if} (idade\_enzo == idade\_valentina {\color{verde}\&\&\\} idade\_enzo == idade\_sofia)\{\\
+    {\color{cinza}9}\quad\quad\quad // Se o Enzo, a Valentina e a Sofia tiverem a mesma idade\\
+    {\color{cinza}10}\quad\quad\quad // Neste caso, FALSO AND FALSO -\textgreater{} Resultado: FALSO\\
+    {\color{cinza}11}\quad\quad\quad sparki.moveForward();\\
+    {\color{cinza}12}\quad\quad\}\\
+    {\color{cinza}13}\quad\quad {\color{verde}else if} (idade\_valentina > idade\_enzo {\color{verde}\&\&\\} idade\_sofia > idade\_valentina)\{\\
+    {\color{cinza}14}\quad\quad\quad // Se o primeiro caso "if" for falso e a Sofia for mais velha que a\\
+    {\color{cinza}15}\quad\quad\quad // Valentina, que por sua vez é mais velha que o Enzo\\
+    {\color{cinza}16}\quad\quad\quad // Neste caso, VERDADEIRO AND VERDADEIRO -\textgreater{} Resultado: VERDADEIRO\\
+    {\color{cinza}17}\quad\quad\quad sparki.moveBackward();\\
+    {\color{cinza}18}\quad\quad\}\\
+    {\color{cinza}19}\quad\quad {\color{verde}else}\{\\
+    {\color{cinza}20}\quad\quad\quad // Se o primeiro e o segundo caso forem falsos\\
+    {\color{cinza}21}\quad\quad\}\\
+    {\color{cinza}22}\quad\}}
+\\
+\par
+O Sparki andará para trás.
+\begin{itemize}
+	\item \textbf{Condição 1)} \\
+    \texttt{idade\_enzo == idade\_valentina} \\
+	1 == 2 \\
+	Essa afirmação é FALSA.\\
+    \\
+    \texttt{idade\_enzo==idade\_sofia}\\
+    1 == 3 \\
+    Essa afirmação é FALSA. \\
+    
+    Como temos o && (AND) ligando as duas afirmações, a comparação será FALSA.\\
+    
+	\item \textbf{Condição 2)} \\
+    \texttt{idade\_sofia > idade\_valentina} \\
+	3 > 2 \\
+	Essa afirmação é VERDADEIRA.\\
+    \\
+    \texttt{idade\_valentina > idade\_enzo} \\
+	2 > 1 \\
+	Essa afirmação também é VERDADEIRA.\\
+    \\
+    Como as duas afirmações são verdadeiras e o \&\&\\ (AND) está ligando-as, a comparação será VERDADEIRA.
+\end{itemize}
+
+\\
+\begin{center}
+EXEMPLO 2)
+\end{center}
+\par
+Um exemplo com as mesmas variáveis anteriores, mas um pouco mais complicado.
+\\
+\\
+{\fontfamily{qcr}\selectfont 
+{\color{cinza}1}\quad{\color{blue}\#include} <Sparki.h>\\
+{\color{cinza}2}\quad{\color{blue}void} setup()\\
+{\color{cinza}3}\quad\{\\
+{\color{cinza}4}\quad\}\\
+{\color{cinza}5}\quad{\color{blue}void} loop()\\
+{\color{cinza}6}\quad\{\\
+{\color{cinza}7}\quad\quad{\color{blue}int} idade\_enzo = 1;\\
+{\color{cinza}8}\quad\quad{\color{blue}int} idade\_valentina = 2;\\
+{\color{cinza}9}\quad\quad{\color{blue}int} idade\_sofia = 3;\\
+{\color{cinza}10}\quad\quad sparki.clearLCD();\\
+{\color{cinza}11}\quad\quad{\color{verde}if} ((idade\_sofia - idade\_valentina) == idade\_enzo {\color{verde}\&\&\\} (idade\_valentina - idade\_enzo) == 3)\\
+{\color{cinza}12}\quad\quad\{\\
+{\color{cinza}13}\quad\quad\quad{\color{cinza}// VERDADEIRO AND FALSO -> Resultado: FALSO}\\
+{\color{cinza}14}\quad\quad\quad sparki.drawCircleFilled(63, 32, 10);\\
+{\color{cinza}15}\quad\quad\}\\
+{\color{cinza}16}\quad\quad{\color{verde}else if} ((idade\_enzo + 1) != 2 {\color{verde}\&\&\\}(idade\_valentina - idade\_enzo) != idade\_sofia)\\
+{\color{cinza}17}\quad\quad\{\\
+{\color{cinza}18}\quad\quad\quad{\color{cinza}// FALSO AND VERDADEIRO -> Resultado: FALSO}\\
+{\color{cinza}19}\quad\quad\quad sparki.drawRectFilled(10, 0, 15, 30);\\
+{\color{cinza}20}\quad\quad\}\\
+{\color{cinza}21}\quad\quad{\color{verde}else if} ((idade\_enzo * 6) == (idade\_valentina * 3))\\
+{\color{cinza}22}\quad\quad\{\\
+{\color{cinza}23}\quad\quad\quad{\color{cinza}// VERDADEIRO}\\
+{\color{cinza}24}\quad\quad\quad sparki.drawChar(10, 1, 'a');\\
+{\color{cinza}25}\quad\quad\}\\
+{\color{cinza}26}\quad\quad{\color{verde}else}\\
+{\color{cinza}27}\quad\quad\{\\
+{\color{cinza}28}\quad\quad\quad sparki.drawString(40, 4, "123");\\
+{\color{cinza}29}\quad\quad\}\\
+{\color{cinza}30}\quad\quad sparki.updateLCD();\\
+{\color{cinza}31}\quad\quad delay(1000);\\
+{\color{cinza}32}\quad\}}
+\\
+\par
+O \textit{Sparki} irá imprimir o caractere ''a'' no LCD.
+
+\begin{itemize}
+    \item \textbf{Condição 1)} \\
+    \texttt{(idade\_sofia - idade\_valentina) == idade\_enzo} \\
+    (3 - 2) == 1 \\
+    1 == 1 \\
+    Essa afirmação é VERDADEIRA.\\
+
+    \texttt{(idade\_valentina - idade\_enzo) == 3} \\
+    (2 - 1) == 3 \\
+    1 == 3 \\
+    Essa afirmação é FALSA.\\
+
+    Como temos o \&\&\ (AND) ligando essas duas afirmações, a comparação será FALSA.\\
+    \item \textbf{Condição 2)}\\
+    \texttt{(idade\_enzo + 1) != 2} \\
+    (1 + 1) != 2 \\
+    2 != 2 \\
+    Essa afirmação é FALSA.\\
+    \\
+    \texttt{(idade\_valentina−idade\_enzo) != idade\_sofia}\\
+    (2 - 1) != 3\\
+    1 != 3\\
+    Essa afirmação é VERDADEIRA.\\
+    \\
+    Como o \&\&\ (AND) está ligando essas duas afirmações, a comparação será FALSA.\\
+
+    \item \textbf{Condição 3)}\\
+    \texttt{(idade\_enzo \ * \ 6) == (idade\_valentina \ * \ 3)} \\
+    (1 \ * \  6) == (2 \ * \ 3) \\
+    6 == 6 \\
+    \\
+    Essa afirmação é VERDADEIRA, logo, a comparação também é.
+\end{itemize}
+
+\begin{center}
+            {\color{azulbebe}Para não esquecer!}\\
+            “And” traduzido para o português significa “e”.
+\end{center}
+
+\begin{center}
+\subsection{OU (OR)}
+\end{center}
+\par
+Este operador deve ser colocado entre duas ou mais afirmações, assim como o AND. Vamos supor que a sua mãe está viajando e você combinou de se encontrar com ela quando ela chegasse no aeroporto. O combinado foi o seguinte: ela mandaria mensagem OU ligaria quando estivesse embarcando no voo de volta, e você sairia de casa por volta de 30 minutos depois, para se encontrar com ela no aeroporto.
+\par
+A condição estabelecida pelo if(), com o OR entre as afirmações, será VERDADEIRA se pelo menos uma das duas comparações for VERDADEIRA.
+\\
+\begin{center}
+EXEMPLO 0)
+\end{center}
+\par
+Exemplo da explicação, apenas para fins didáticos.
+\\
+\\
+{\fontfamily{qcr}\selectfont 
+{\color{cinza}1}\quad{\color{verde}if} (Sua mãe te mandasse mensagem OR Sua mãe te ligasse)\\
+{\color{cinza}2}\quad\{\\
+{\color{cinza}3}\quad\quad Esperar 30 minutos;\\
+{\color{cinza}4}\quad\quad Sair de casa;\\
+{\color{cinza}5}\quad\}\\
+{\color{cinza}6}\quad{\color{verde}else}\\
+{\color{cinza}7}\quad\{\\
+{\color{cinza}8}\quad\quad Continuar esperando a mensagem ou a ligação;\\
+{\color{cinza}9}\quad\}}
+\\
+\par
+Então, se a sua mãe te ligasse (afirmação VERDADEIRA) mas não te mandasse mensagem (afirmação FALSA), a condição do if() seria VERDADEIRA e você esperaria 30 minutos para sair de casa. Se as duas afirmações fossem VERDADEIRAS, ou seja, se ela te mandar mensagem e te ligar, a condição if() também será VERDADEIRA, e você executará as ações dentro das chaves do if(). A seguir temos todos os resultados possíveis para um OR entre duas afirmações:
+\begin{itemize}
+    \item VERDADEIRO OR VERDADEIRO -> Resultado: VERDADEIRO
+    \item VERDADEIRO OR FALSO -> Resultado: VERDADEIRO
+    \item FALSO OR VERDADEIRO -> Resultado: VERDADEIRO
+    \item FALSO OR FALSO -> Resultado: FALSO
+\end{itemize}
+\par
+Na programação, utilizamos os caracteres || para simbolizar o OR.
+\\
+\begin{center}
+EXEMPLO 1)
+\end{center}
+{\fontfamily{qcr}\selectfont 
+{\color{cinza}1}\quad{\color{blue}\#include} <Sparki.h>;\\
+{\color{cinza}2}\quad\\
+{\color{cinza}3}\quad{\color{blue}void} setup()\\
+{\color{cinza}4}\quad\{\\
+{\color{cinza}5}\quad\}\\
+{\color{cinza}6}\quad\\
+{\color{cinza}7}\quad{\color{blue}void} loop()\\
+{\color{cinza}8}\quad\{\\
+{\color{cinza}9}\quad\quad{\color{blue}int} idade\_enzo = 1;\\
+{\color{cinza}10}\quad\quad{\color{blue}int} idade\_valentina = 2;\\
+{\color{cinza}11}\quad\quad{\color{blue}int} idade\_sofia = 3;\\
+{\color{cinza}12}\quad\}\\
+{\color{cinza}13}\quad{\color{verde}if}(idade\_enzo == idade\_valentina {\color{verde}||} idade\_sofia != idade\_valentina)\\
+{\color{cinza}14}\quad\{\\
+{\color{cinza}15}\quad\quad{\color{cinza}//Neste caso, FALSO OR VERDADEIRO -> Resultado: VERDADEIRO}\\
+{\color{cinza}16}\quad\quad sparki.moveBackward();\\
+{\color{cinza}17}\quad\}\\
+{\color{cinza}18}\quad{\color{verde}else if}(idade\_valentina == (idade\_sofia - 1) {\color{verde}||} (idade\_valentina + 1) == idade\_sofia)\\
+{\color{cinza}19}\quad\{\\
+{\color{cinza}20}\quad\quad{\color{cinza}//Neste caso, VERDADEIRO OR VERDADEIRO -> Resultado: VERDADEIRO}\\
+{\color{cinza}21}\quad\quad sparki.moveForward();\\
+{\color{cinza}22}\quad\}\\
+{\color{cinza}23}\quad{\color{verde}else}\\
+{\color{cinza}24}\quad\{\\
+{\color{cinza}25}\quad\quad{\color{cinza}//Se a primeira e a segunda condição forem falsas}\\
+{\color{cinza}26}\quad\quad sparki.moveRight();\\
+{\color{cinza}27}\quad\}}
+\\
+\par
+O Sparki andará para trás.
+\begin{itemize}
+    \item \textbf{Condição 1)} \\
+    \texttt{idade\_enzo == idade\_valentina} \\
+    1 == 2 \\
+    Essa afirmação é FALSA.\\
+    \\
+    \texttt{idade\_sofia != idade\_valentina} \\
+    3 != 2 \\
+    Essa afirmação é VERDADEIRA.\\
+    \\
+    Como o \texttt{||} (OR) liga essas duas afirmações, sabemos que a comparação será VERDADEIRA.
+    
+    \item \textbf{Condição 2)} Essa condição não será nem lida, pois ela só poderia ser executada se todos os \texttt{if()} anteriores, dentro dessa estrutura condicional, fossem falsos.
+\end{itemize}
+\\
+\begin{center}
+EXEMPLO 2)
+\end{center}
+\\
+\\
+{\fontfamily{qcr}\selectfont 
+{\color{cinza}1}\quad{\color{blue}\#include} <Sparki.h>;\\
+{\color{cinza}2}\quad\\
+{\color{cinza}3}\quad{\color{blue}void} setup()\\
+{\color{cinza}4}\quad\{\\
+{\color{cinza}5}\quad\}\\
+{\color{cinza}6}\quad\\
+{\color{cinza}7}\quad{\color{blue}void} loop()\\
+{\color{cinza}8}\quad\{\\
+{\color{cinza}9}\quad\quad{\color{blue}int} idade\_enzo = 1;\\
+{\color{cinza}10}\quad\quad{\color{blue}int} idade\_valentina = 2;\\
+{\color{cinza}11}\quad\quad{\color{blue}int} idade\_sofia = 3;\\
+{\color{cinza}12}\quad\quad sparki.clearLOO();\\
+{\color{cinza}13}\quad\quad{\color{verde}if} (idade\_valentina != 2 {\color{verde}||} idade\_enzo != 1)\\
+{\color{cinza}14}\quad\quad\{\\
+{\color{cinza}15}\quad\quad\quad{\color{cinza}// FALSO OR FALSO -> Resultado: FALSO}\\
+{\color{cinza}16}\quad\quad\quad sparki.print("Condicao 1");\\
+{\color{cinza}17}\quad\quad\}\\
+{\color{cinza}18}\quad\quad{\color{verde}else if} (idade\_sofia != (idade\_valentina - 1) {\color{verde}\&\&\\} idade\_sofia == idade\_enzo)\\
+{\color{cinza}19}\quad\quad\{\\
+{\color{cinza}20}\quad\quad\quad{\color{cinza}// Código continua...}\\
+{\color{cinza}21}\quad\quad\}\\
+{\color{cinza}22}\quad{\color{cinza}//VERDADEIRO AND FALSO -> Resultado: FALSO}\\
+{\color{cinza}23}\quad sparki.print("Condicao 2");\\
+{\color{cinza}24}\quad{\color{verde}else if} ((idade\_enzo + 2) == (idade\_sofia + 1) {\color{verde}||} idade\_enzo == (4 - idade\_sofia))\\
+{\color{cinza}25}\quad\{\\
+{\color{cinza}26}\quad\quad{\color{cinza}//FALSO OR VERDADEIRO -> Resultado: VERDADEIRO}\\
+{\color{cinza}27}\quad\quad sparki.print("Condicao 3");\\
+{\color{cinza}28}\quad\}\\
+{\color{cinza}29}\quad{\color{verde}else}\\
+{\color{cinza}30}\quad\{\\
+{\color{cinza}31}\quad\quad sparki.print("Nenhuma das anteriores");\\
+{\color{cinza}32}\quad\}\\
+{\color{cinza}33}\quad sparki.updateLCD();\\
+{\color{cinza}34}\quad delay(1000);\\
+{\color{cinza}35}\quad\}}
+\\
+\par
+O \textit{Sparki} irá imprimir na tela "Condição 3".
+\begin{itemize}
+    \item \textbf{Condição 1)} \\
+    \texttt{idade\_valentina == 2} \\
+    \texttt{idade\_enzo == 1} \\
+    Ambas afirmações são FALSAS.\\
+    \item \textbf{Condição 2)} \\
+    \texttt{idade\_sofia == idade\_enzo} \\
+    Essa afirmação é FALSA.\\
+    \item \textbf{Condição 3)} \\
+    \texttt{(idade\_enzo + 2) == (idade\_sofia + 1)} \\
+    (1 + 2) == (3 + 1) \\
+    3 == 4 \\
+    Essa afirmação é FALSA.\\
+    \\
+    \texttt{idade\_enzo == (4 - idade\_sofia)} \\
+    1 == (4 - 3) \\
+    1 == 1 \\
+    Essa afirmação é VERDADEIRA, logo FALSO OR VERDADEIRO -> Resultado: VERDADEIRO.\\
+\end{itemize}
+
+\begin{center}
+            {\color{azulbebe}Para não esquecer!}\\
+            “Or” traduzido para o português significa “ou”.
+\end{center}
+
+\begin{center}
+    \subsection{NÃO (NOT):}
+\end{center}
+
+\begin{itemize}
+    \item NOT(VERDADEIRO) -> Resultado: FALSO
+    \item NOT(FALSO) -> Resultado: VERDADEIRO
+\end{itemize}
+\\
+\\
+{\fontfamily{qcr}\selectfont
+    {\color{cinza}1}\quad{\color{blue}\#include} <Sparki.h>\\
+    {\color{cinza}2}\\
+    {\color{cinza}3}\quad{\color{blue}void} setup()\\
+    {\color{cinza}4}\quad\{\\
+    {\color{cinza}5}\quad\}\\
+    {\color{cinza}6}\\
+    {\color{cinza}7}\quad{\color{blue}void} loop()\\
+    {\color{cinza}8}\quad\{\\
+    {\color{cinza}9}\quad\quad {\color{blue}int} idade\_enzo = 1;\\
+    {\color{cinza}10}\quad\quad {\color{blue}int} idade\_valentina = 2;\\
+    {\color{cinza}11}\quad\quad {\color{blue}int} idade\_sofia = 3;\\
+    {\color{cinza}12}\\
+    {\color{cinza}13}\quad\quad {\color{verde}if} ({\color{verde}!}(idade\_enzo == 1))\\
+    {\color{cinza}14}\quad\quad \{\\
+    {\color{cinza}15}\quad\quad\quad //NOT(VERDADEIRO) -> Resultado: FALSO\\
+    {\color{cinza}16}\quad\quad \}\\
+    {\color{cinza}17}\quad\quad {\color{verde}else if} ({\color{verde}!}(idade\_valentina == 3))\\
+    {\color{cinza}18}\quad\quad \{\\
+    {\color{cinza}19}\quad\quad\quad //NOT(FALSO) -> Resultado: VERDADEIRO\\
+    {\color{cinza}20}\quad\quad\quad sparki.moveForward();\\
+    {\color{cinza}21}\quad\quad \}\\
+    {\color{cinza}22}\quad\quad {\color{verde}else if} ({\color{verde}!}(idade\_sofia != 3))\\
+    {\color{cinza}23}\quad\quad \{\\
+    {\color{cinza}24}\quad\quad\quad //NOT(FALSO) -> Resultado: VERDADEIRO\\
+    {\color{cinza}25}\quad\quad\quad sparki.moveBackward();\\
+    {\color{cinza}26}\quad\quad \}\\
+    {\color{cinza}27}\quad\}}
+\\
+\par
+O \textit{Sparki} andará para frente, pois:
+
+\begin{itemize} 
+    \item \textbf{Condição 1)} \\ 
+    \texttt{idade\_enzo = 1} \\ 
+    1 == 1\\ 
+    Sabemos que a afirmação 1 == 1 é VERDADEIRA, mas há um caractere \texttt{!} antes dela, por isso, ela acaba se tornando FALSA.\\
+    
+    \item \textbf{Condição 2)} \\ 
+    \texttt{idade\_valentina = 3} \\ 
+    2 == 3 \\ 
+    A afirmação 2 == 3 é FALSA, mas o caractere \texttt{!} antes dela a torna VERDADEIRA.\\
+    
+    \item \textbf{Condição 3)} \\ 
+    Essa condição não será lida.
+\end{itemize}
+\begin{center}
+            {\color{azulbebe}Para não esquecer!}\\
+            “Not” traduzido para o português significa “não”.
+\end{center}
+
+\section{\textbf{Infravermelho}}
+
+\begin{center}
+    \subsubsection{Introdução}
+\end{center}
+\par
+No capítulo de infravermelho, iremos falar sobre o funcionamento e utilidade que os sensores infravermelhos do Sparki possuem. As ondas infravermelhas estão mais presentes no nosso dia a dia do que você pode imaginar, na maioria das vezes elas são úteis quando utilizados receptores de luz infravermelha. Nesse capítulo iremos explicar como que o Sparki pode ser controlado pelo controle remoto e como fazê-lo seguir linhas utilizando dessas ondas.
+
+\begin{center}
+    \subsection{Ondas Infravermelhas}
+\end{center}
+\par
+Para começar, que tal falarmos do que exatamente e uma onda infravermelha? Ela, assim como a luz visível, e uma onda eletromagnética, uma onda capaz de se propagar no vácuo. A luz infravermelha e invisível aos olhos humanos, isso porque nossos fotorreceptores dentro dos nossos olhos, são incapazes de serem estimulados pela frequência das ondas infravermelhas. Chamamos essa onda de infravermelho, porque a sua frequência e menor do que a frequência da cor vermelha (o prefixo infra indica que algo e inferior). A cor vermelha é a cor com a frequência mais baixa que o ser humano e capaz de enxergar, logo se temos uma onda com frequência menor, ela se torna invisível.
+\par
+Você deve estar lembrando do Capítulo de Ultrassom, onde falamos que ondas ultrassônicas são ondas sonoras que os seres humanos são incapazes de escutar porque possuem uma frequência muito alta. Essa é a mesma lógica da luz ultravioleta, presente acima na imagem 8.1. Elas são ondas eletromagnéticas com frequência mais alta do que a cor violeta, que é a cor com frequência mais alta que nós somos capazes de enxergar, logo, ela também é invisível aos nossos olhos. Alguns animais são capazes de ver essas cores, logo eles conseguem ver o mundo ainda mais colorido do que nós humanos. 
+\par
+Os raios infravermelhos originam-se dos corpos quentes como o Sol e o corpo de seres vivos, por exemplo. Cada cor está relacionada com uma temperatura (se você iluminar um termômetro com luzes de cores diferentes, ele irá dar temperaturas diferentes), e o vermelho é a cor mais quente. Logo, mesmo sem conseguirmos ver o infravermelho, ainda somos capazes de senti-lo porque ele aquece a nossa pele. Esse tipo de onda é muito importante para a vida na Terra. Ela é responsável pelo efeito estufa, onde parte dos raios solares ficam presos dentro da nossa atmosfera e assim eles mantêm a Terra aquecida e propensa à vida.
+
+\begin{center}
+    \subsection{Aplicações no cotidiano}
+\end{center}
+
+\begin{center}
+    \subsubsection{Óculos de visão noturna}
+\end{center}
+\par
+Alguns óculos de visão noturna permitem que a gente enxergue no escuro captando a radiação infravermelha do ambiente e gerando um termograma, que nada mais é do que uma imagem colorida que mostra onde está mais quente e onde está mais frio. Assim, somos capazes de enxergar objetos e outras pessoas mesmo na escuridão.
+
+\begin{center}
+    \subsubsection{Câmeras térmicas}
+\end{center}
+\par
+Usando a mesma tecnologia dos óculos de visão noturna mencionados acima, essas câmeras convertem frequências que estão no espectro infravermelho para o espectro visível, assim conseguimos visualizar os objetos por meio do calor que eles emitem. Essas câmeras são úteis para encontrar pessoas ou animais em meio à vegetação, destroços ou esconderijos, além de poder encontrar falhas em equipamentos dependendo de onde estiver mais quente ou mais frio do que o normal.
+
+\begin{center}
+    \subsubsection{}
+\end{center}
+\par
+Quando você aperta um botão do seu controle remoto para mudar o canal da sua televisão, ele se comunica com a TV utilizando raios infravermelhos. Se você apontar a câmera do seu celular para a lâmpada na ponta do seu controle e apertar algum botão, você conseguirá enxergar os raios sendo emitidos. A seguir, iremos explicar como essa comunicação funciona.
+
+\begin{center}
+    \subsection{}
+\end{center}
+\par
+Agora, vamos começar a falar sobre como podemos controlar o Sparki utilizando o controle remoto, que vem junto com o kit. Ele funciona emitindo luz infravermelha a partir de sua lâmpada, que deve ser captada pelo sensor de infravermelho presente no Sparki.
+\par
+Cada botão do controle remoto possui um padrão a ele relacionado. Esse padrão representa quantas vezes a lâmpada do controle deve piscar e por quanto tempo. O sensor recebe esse padrão, e o Sparki é responsável por traduzir esse padrão para o botão correspondente. Para facilitar o entendimento, podemos lembrar do código Morse, onde cada letra e número é associado a um conjunto de pontos e traços. O que o controle remoto faz é parecido com a tradução de uma palavra em português para o código Morse; depois, nosso robô deve saber ler essa palavra em código Morse e traduzi-la de volta para o português.
+\par
+Atenção! Os sinais infravermelhos não estão em código Morse; mencionamos ele apenas como uma forma de facilitar a compreensão. No geral, controles remotos têm padrões diferentes uns dos outros.
+\par
+Para facilitar a nossa vida, os criadores do Sparki atribuíram a cada botão um número inteiro.
+\\
+\\
+{\fontfamily{qcr}\selectfont
+    {\color{gray}1}\quad{\color{blue}\#include} <Sparki.h>;\\
+    {\color{gray}2}\\
+    {\color{gray}3}\quad{\color{blue}int} botao;\\
+    {\color{gray}4}\\
+    {\color{gray}5}\quad{\color{blue}void} setup()\\
+    {\color{gray}6}\quad\{\\
+    {\color{gray}7}\quad\}\\
+    {\color{gray}8}\\
+    {\color{gray}9}\quad{\color{blue}void} loop()\\
+    {\color{gray}10}\quad\{\\
+    {\color{gray}11}\quad\quad botao = sparki.readIR();\\
+    {\color{gray}12}\quad\}}\
+\par
+Esta função salva na nossa variável inteira o número correspondente ao último botão que foi apertado antes dela ser chamada. Caso não tenhamos apertado nenhum botão, ela irá salvar o valor '-1'. Graças ao capítulo de 'if' e 'else', podemos escrever um algoritmo que executa uma atividade diferente para cada botão que for apertado. Podemos controlar a movimentação do nosso robô da seguinte forma, por exemplo:
+\\
+\\
+{\fontfamily{qcr}\selectfont
+    {\color{gray}1}\quad{\color{blue}\#include} <Sparki.h>;\\
+    {\color{gray}2}\\
+    {\color{gray}3}\quad{\color{blue}int} botao;\\
+    {\color{gray}4}\\
+    {\color{gray}5}\quad{\color{blue}void} setup()\\
+    {\color{gray}6}\quad\{\\
+    {\color{gray}7}\quad\}\\
+    {\color{gray}8}\\
+    {\color{gray}9}\quad{\color{blue}void} loop()\\
+    {\color{gray}10}\quad\{\\
+    {\color{gray}11}\quad\quad botao = sparki.readIR();\\
+    {\color{gray}12}\quad\quad{\color{verde}if}(botao == 70)\\
+    {\color{gray}13}\quad\quad \{\\
+    {\color{gray}14}\quad\quad\quad sparki.moveStop();\\
+    {\color{gray}15}\quad\quad\quad sparki.moveForward();\\
+    {\color{gray}16}\quad\quad \}\\
+    {\color{gray}17}\quad\quad{\color{verde}else if}(botao == 67)\\
+    {\color{gray}18}\quad\quad \{\\
+    {\color{gray}19}\quad\quad\quad sparki.moveStop();\\
+    {\color{gray}20}\quad\quad\quad sparki.moveRight();\\
+    {\color{gray}21}\quad\quad \}\\
+    {\color{gray}22}\quad\quad{\color{verde}else if}(botao == 68)\\
+    {\color{gray}23}\quad\quad \{\\
+    {\color{gray}24}\quad\quad\quad sparki.moveStop();\\
+    {\color{gray}25}\quad\quad\quad sparki.moveLeft();\\
+    {\color{gray}26}\quad\quad \}\\
+    {\color{gray}27}\quad\quad{\color{verde}else if}(botao == 21)\\
+    {\color{gray}28}\quad\quad \{\\
+    {\color{gray}29}\quad\quad\quad sparki.moveStop();\\
+    {\color{gray}30}\quad\quad\quad sparki.moveBackward();\\
+    {\color{gray}31}\quad\quad \}\\
+    {\color{gray}32}\quad\quad{\color{verde}else if}(botao == 64)\\
+    {\color{gray}33}\quad\quad \{\\
+    {\color{gray}34}\quad\quad\quad sparki.moveStop();\\
+    {\color{gray}35}\quad\quad \}\\
+    {\color{gray}36}\quad\quad delay(1000);\\
+    {\color{gray}37}\quad\}\\
+}
+\begin{center}
+    \subsection{Vetor de sensores infravermelhos}
+\end{center}
+\par
+Talvez você nunca tenha reparado, mas embaixo do Sparki há cinco retângulos pretos perto da garra: três no meio e um em cada canto. Esses retângulos são nada mais nada menos do que os sensores infravermelhos responsáveis por medir a reflectância da luz do chão abaixo dele (a reflectância de um corpo é a quantidade de luz que ele reflete).
+\par
+Você já deve ter ouvido falar que a cor preta é a ausência de todas as cores, enquanto o branco é quando todas elas estão presentes. Isso porque uma superfície preta absorve todas as frequências do espectro visível, enquanto o branco as reflete de volta. Já uma superfície amarela, por exemplo, absorve todas as frequências menos a do amarelo, por isso a vemos da cor amarela, porque foi a única frequência refletida para os nossos olhos. Como você já deve ter percebido, quando medimos a reflectância de uma superfície branca, certamente o valor será bem maior do que o de uma superfície preta.
+\par
+Esses sensores então são utilizados para conseguirmos identificar quais são as cores que estão embaixo do Sparki? Essa é uma questão interessante! É possível diferenciar algumas cores pela sua reflectância, mas até mesmo cores bem diferentes podem representar valores iguais ou muito semelhantes. Os sensores não são tão precisos e adequados para essa situação; certamente haverão muitos enganos. A verdadeira utilização deles é conseguir diferenciar superfícies mais escuras das mais claras, o que é de extrema importância quando queremos fazer um exercício muito importante: um robô seguidor de linhas, que normalmente anda por cima das linhas pretas em um fundo branco.
+\par
+É necessário certo cuidado ao utilizar esses sensores, porque uma mesma superfície pode retornar valores diferentes de reflectância. Não podemos garantir que esteja tudo pintado no exato mesmo tom ou que haja a mesma incidência de luz em todo lugar, por isso, quando mexemos com valores de reflectância, devemos adotar limiares. Limiares são intervalos de valores que, embora diferentes um do outro, consideramos como sendo a mesma coisa. Daremos como exemplo a separação das fases da vida: temos a fase infantil, adulta e terceira idade, por exemplo, e dependendo da sua idade você irá se encaixar em uma dessas três fases.
+
+\begin{table}[h]
+    \centering
+    \resizebox{\columnwidth}{!}{
+        \begin{tabular}{|c|c|c|c|c|c|}
+            \hline
+            \textbf{Limiares} & 0 a 1 ano & 1 a 12 anos & 12 a 18 anos & 18 a 60 anos & 60 anos em diante \\
+            \hline
+            \textbf{Classificação} & Bebê & Criança & Adolescente & Adulto & Idoso \\
+            \hline
+        \end{tabular}
+    }
+\end{table}
+\par
+A quantidade de limiares que vamos utilizar depende do problema que estamos tratando. Na situação acima, talvez fosse conveniente utilizar apenas 5 limiares, mas pode ser que, em outra situação, você tenha que incluir classificações como pré-adolescente ou ancião. Depois de determinar quais serão nossos limiares, podemos começar a coletar dados e, então, separá-los e classificá-los. Por exemplo, você tem 16 anos? Então você é um adolescente. Você tem 20 anos? Então você é um adulto. Você tem 14 anos, 7 meses, 2 semanas, 5 dias, 14 horas e meia de vida? Então você também é considerado um adolescente.
+\par
+A importância do exemplo acima é fazer você entender que mais de um valor pode significar a mesma coisa, porque ao utilizar os sensores infravermelhos, você receberá muitos valores de reflectância diferentes uns dos outros, e mesmo assim todos eles podem indicar que o chão é preto ou não, ou quem sabe só um pouco claro.
+
+\begin{center}
+    \subsubsection{Função}
+\end{center}
+\par
+Enfim, já está na hora de ensinarmos como você recebe esses valores de reflectância, não é mesmo? Para cada um dos 5 sensores, existe uma função diferente que o ativa. Ela nos retorna então um número inteiro, o qual devemos salvar numa variável inteira. As funções que ativam os sensores são: sparki.lineLeft(), sparki.lineRight(), sparki.lineCenter(), sparki.edgeLeft() e sparki.edgeRight().
+
+\begin{center}
+    {\color{azulbebe}Para não esquecer!}\\
+    “Left” traduzido para o português significa “Esquerda”, “Right” significa “Direita” e “Edge” significa “Borda ou Beira”.
+\end{center}
+
+\par
+Caso estejamos interessados em saber se o Sparki está pisando em cima de uma linha ou não, podemos escrever o seguinte código (vamos considerar que uma reflectância abaixo de 300 significa que a cor é preta e que acima disso a cor é branca):
+\\
+\\
+{\fontfamily{qcr}\selectfont
+{\color{gray}1}\quad{\color{blue}\#include} <Sparki.h>\\
+{\color{gray}2}\\
+{\color{gray}3}\quad{\color{blue}int} limiar = 300, esquerda, centro, direita;\\
+{\color{gray}4}\\
+{\color{gray}5}\quad{\color{blue}void} setup()\\
+{\color{gray}6}\quad\{\\
+{\color{gray}7}\quad\quad sparki.clearLCD();\\
+{\color{gray}8}\quad\quad sparki.updateLCD();\\
+{\color{gray}9}\quad\}\\
+{\color{gray}10}\\
+{\color{gray}11}\quad{\color{blue}void} loop()\\
+{\color{gray}12}\quad\{\\
+{\color{gray}13}\quad\quad esquerda = sparki.lineLeft();\\
+{\color{gray}14}\quad\quad centro = sparki.lineCenter();\\
+{\color{gray}15}\quad\quad direita = sparki.lineRight();\\
+{\color{gray}16}\quad\quad delay(500);\\
+{\color{gray}17}\\
+{\color{gray}18}\quad\quad {\color{verde}if}(esquerda < limiar || centro < limiar || direita < limiar)\\
+{\color{gray}19}\quad\quad \{\\
+{\color{gray}20}\quad\quad\quad sparki.clearLCD();\\
+{\color{gray}21}\quad\quad\quad sparki.print("O Sparki está em cima de uma linha");\\
+{\color{gray}22}\quad\quad\quad sparki.updateLCD();\\
+{\color{gray}23}\quad\quad \}\\
+{\color{gray}24}\quad\quad {\color{verde}else}\\
+{\color{gray}25}\quad\quad \{\\
+{\color{gray}26}\quad\quad\quad sparki.clearLCD();\\
+{\color{gray}27}\quad\quad\quad sparki.print("O Sparki NÃO está em cima de uma linha");\\
+{\color{gray}28}\quad\quad\quad sparki.updateLCD();\\
+{\color{gray}29}\quad\quad \}\\
+{\color{gray}30}\\
+{\color{gray}31}\quad\quad delay(500);\\
+{\color{gray}32}\quad\}}\\
+\par
+Nesse caso, se qualquer um dos 3 sensores do meio identificar a cor preta, estamos assumindo que o Sparki está passando em cima de uma linha.
+\par
+Calma lá! Mas afinal, por que esses sensores se chamam sensores infravermelhos? O que eles têm a ver com a luz infravermelha?
+\par
+Opa, desculpa! A razão do nome é porque, junto com esses sensores, debaixo do Sparki, nós temos LEDs (diodos emissores de luz) que emitem raios infravermelhos que serão refletidos pelo chão, e são esses raios que os sensores irão utilizar para medir a reflectância do chão.
+
+
+
 \end{document}
