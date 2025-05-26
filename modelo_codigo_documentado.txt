@@ -1,0 +1,33 @@
+/*Autor(es): Lara
+  Source: https://arcbotics.com/lessons/first-steps-with-the-lcd-display/#Writing_Text_and_Numbers (modificado)
+  Data: 28 de Abril de 2025
+  
+  Objetivo: Imprime uma frase na tela LCD
+    Mostrar funcionamento básico do placa
+  
+  Testado em:
+    ArduinoIDE versão 1.6.13 Linux 64 Bit
+*/
+
+
+/* Variáveis
+  --não tem
+*/
+
+/* Execução
+Este programa utiliza a placa LCD para imprimir uma frase na tela 
+com um comando da biblioteca do sparki
+*/
+
+include <Sparki.h>;
+ 
+void setup()
+{
+}
+ 
+void loop()
+{
+    sparki.clearLCD();  
+    sparki.println("def");
+    delay(1000);
+}
